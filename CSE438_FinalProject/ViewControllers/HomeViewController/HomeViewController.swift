@@ -29,7 +29,3 @@ class HomeViewController: UIViewController {
     */
 
 }
-
-extension HomeViewController: KolodaViewDelegate{
-    
-}

@@ -10,6 +10,10 @@
 		56C337502567887D00F4F95F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3374F2567887D00F4F95F /* HomeViewController.swift */; };
 		56C33756256789DC00F4F95F /* KolodaViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33755256789DC00F4F95F /* KolodaViewDataSource.swift */; };
 		56C3375825678A2800F4F95F /* KolodaViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3375725678A2800F4F95F /* KolodaViewDelegate.swift */; };
+		56C3375B25678D7A00F4F95F /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3375A25678D7A00F4F95F /* Song.swift */; };
+		56C3375D2567902E00F4F95F /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3375C2567902E00F4F95F /* Album.swift */; };
+		56C3375F2567903200F4F95F /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3375E2567903200F4F95F /* Artist.swift */; };
+		56C337612567926600F4F95F /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C337602567926600F4F95F /* APIResponse.swift */; };
 		56E43232256327660088D117 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E43231256327660088D117 /* AppDelegate.swift */; };
 		56E43234256327660088D117 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E43233256327660088D117 /* SceneDelegate.swift */; };
 		56E43236256327660088D117 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E43235256327660088D117 /* ViewController.swift */; };
@@ -24,6 +28,10 @@
 		56C3374F2567887D00F4F95F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		56C33755256789DC00F4F95F /* KolodaViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KolodaViewDataSource.swift; sourceTree = "<group>"; };
 		56C3375725678A2800F4F95F /* KolodaViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KolodaViewDelegate.swift; sourceTree = "<group>"; };
+		56C3375A25678D7A00F4F95F /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		56C3375C2567902E00F4F95F /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		56C3375E2567903200F4F95F /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		56C337602567926600F4F95F /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		56E4322E256327660088D117 /* CSE438_FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSE438_FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E43231256327660088D117 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56E43233256327660088D117 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,6 +100,17 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		56C3375925678D6700F4F95F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				56C3375A25678D7A00F4F95F /* Song.swift */,
+				56C3375C2567902E00F4F95F /* Album.swift */,
+				56C3375E2567903200F4F95F /* Artist.swift */,
+				56C337602567926600F4F95F /* APIResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		56E43225256327660088D117 = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +134,7 @@
 			children = (
 				56E43231256327660088D117 /* AppDelegate.swift */,
 				56E43233256327660088D117 /* SceneDelegate.swift */,
+				56C3375925678D6700F4F95F /* Models */,
 				56C3374E2567885D00F4F95F /* ViewControllers */,
 				56E43237256327660088D117 /* Main.storyboard */,
 				56E4323A256327680088D117 /* Assets.xcassets */,
@@ -239,12 +259,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56C3375B25678D7A00F4F95F /* Song.swift in Sources */,
 				56E43236256327660088D117 /* ViewController.swift in Sources */,
 				56E43232256327660088D117 /* AppDelegate.swift in Sources */,
+				56C337612567926600F4F95F /* APIResponse.swift in Sources */,
+				56C3375F2567903200F4F95F /* Artist.swift in Sources */,
 				56E43234256327660088D117 /* SceneDelegate.swift in Sources */,
 				56C3375825678A2800F4F95F /* KolodaViewDelegate.swift in Sources */,
 				56C33756256789DC00F4F95F /* KolodaViewDataSource.swift in Sources */,
 				56C337502567887D00F4F95F /* HomeViewController.swift in Sources */,
+				56C3375D2567902E00F4F95F /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
