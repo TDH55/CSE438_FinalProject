@@ -10,12 +10,21 @@ import UIKit
 import Koloda
 
 class HomeViewController: UIViewController {
-
-
+    
+    @IBOutlet weak var songCardView: KolodaView!
+    
+    var songList: [Song] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        //set up card view
+        songCardView.delegate = self
+        songCardView.dataSource = self
+        
+        //TODO: load songs
     }
     
 

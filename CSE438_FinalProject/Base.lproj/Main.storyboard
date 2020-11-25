@@ -81,6 +81,9 @@
                             <constraint firstItem="0dk-0K-vcJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="yc9-b3-tUh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="songCardView" destination="ChG-hw-v1v" id="OFQ-pR-Kva"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

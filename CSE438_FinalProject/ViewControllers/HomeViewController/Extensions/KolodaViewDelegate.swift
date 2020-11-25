@@ -11,4 +11,10 @@ import Koloda
 
 extension HomeViewController: KolodaViewDelegate{
     
+    func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+        //TODO: get new songs
+        songCardView.reloadData()
+    }
+    
+    
 }
