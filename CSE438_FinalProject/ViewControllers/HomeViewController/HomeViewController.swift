@@ -15,7 +15,23 @@ class HomeViewController: UIViewController {
     
     var songList: [Song] = []
     
-   // Change
+    @IBAction func dislikeButton(_ sender: Any) {
+        //save song data (Core Data) so the song does not repeat
+    }
+    
+    @IBAction func likeButton(_ sender: Any) {
+        //from API, add song data to Table View in LikeListTableViewController() - maintain order
+    }
+    
+    @IBAction func songListButton(_ sender: Any) {
+        let songListVC = LikeListTableViewController()
+        navigationController?.pushViewController(songListVC, animated: true)
+    }
+    
+    @IBAction func lyricsButton(_ sender: Any) {
+        let lyricsVC = LyricsViewController()
+        navigationController?.pushViewController(lyricsVC, animated: true)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
