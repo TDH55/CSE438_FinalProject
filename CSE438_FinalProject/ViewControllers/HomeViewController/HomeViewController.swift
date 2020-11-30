@@ -24,13 +24,13 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func songListButton(_ sender: Any) {
-        let songListVC = LikeListTableViewController()
-        navigationController?.pushViewController(songListVC, animated: true)
+//        let songListVC = SongListVC()
+//        navigationController?.pushViewController(songListVC, animated: true)
     }
     
     @IBAction func lyricsButton(_ sender: Any) {
-        let lyricsVC = LyricsViewController()
-        navigationController?.pushViewController(lyricsVC, animated: true)
+//        let lyricsVC = LyricsViewController()
+//        navigationController?.pushViewController(lyricsVC, animated: true)
     }
     
     override func viewDidLoad() {
@@ -39,8 +39,8 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         //set up card view
-        songCardView.delegate = self
-        songCardView.dataSource = self
+//        songCardView.delegate = self
+//        songCardView.dataSource = self
         
         //TODO: load songs
     }

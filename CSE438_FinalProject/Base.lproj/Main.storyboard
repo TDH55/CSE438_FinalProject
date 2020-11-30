@@ -50,7 +50,7 @@
                                         <state key="normal" title="Song List"/>
                                         <connections>
                                             <action selector="songListButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZE7-kq-A6L"/>
-                                            <segue destination="1AA-JL-cLI" kind="show" id="UO8-Fa-wEa"/>
+                                            <segue destination="1AA-JL-cLI" kind="show" id="kmS-k1-rwf"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIT-0m-y6m">
@@ -132,39 +132,40 @@
             </objects>
             <point key="canvasLocation" x="1947.826086956522" y="852.45535714285711"/>
         </scene>
-        <!--Like List Table View Controller-->
+        <!--Song ListVC-->
         <scene sceneID="nbf-0U-Kwb">
             <objects>
-                <viewController id="1AA-JL-cLI" customClass="LikeListTableViewController" customModule="CSE438_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1AA-JL-cLI" customClass="SongListVC" customModule="CSE438_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hBf-AY-tcf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VLY-Qc-3Fi">
-                                <rect key="frame" x="20" y="182" width="374" height="680"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="680" id="1ct-MO-thB"/>
-                                </constraints>
-                            </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liked Songs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCa-Sg-6Bd">
                                 <rect key="frame" x="94" y="105" width="226" height="51"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="42"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="br6-jJ-tw8">
+                                <rect key="frame" x="16" y="172" width="382" height="674"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="VLY-Qc-3Fi" firstAttribute="centerX" secondItem="qCa-Sg-6Bd" secondAttribute="centerX" id="346-G0-HlS"/>
-                            <constraint firstItem="VLY-Qc-3Fi" firstAttribute="leading" secondItem="hBf-AY-tcf" secondAttribute="leadingMargin" id="JA2-Fa-f1q"/>
-                            <constraint firstItem="VLY-Qc-3Fi" firstAttribute="bottom" secondItem="UIq-6H-p97" secondAttribute="bottom" id="UTo-uz-OOp"/>
-                            <constraint firstItem="VLY-Qc-3Fi" firstAttribute="top" secondItem="qCa-Sg-6Bd" secondAttribute="bottom" constant="26" id="auL-cS-0GG"/>
-                            <constraint firstItem="VLY-Qc-3Fi" firstAttribute="trailing" secondItem="hBf-AY-tcf" secondAttribute="trailingMargin" id="ctq-Ch-Pjb"/>
+                            <constraint firstItem="br6-jJ-tw8" firstAttribute="top" secondItem="qCa-Sg-6Bd" secondAttribute="bottom" constant="16" id="0ma-gO-G61"/>
+                            <constraint firstItem="UIq-6H-p97" firstAttribute="bottom" secondItem="br6-jJ-tw8" secondAttribute="bottom" constant="16" id="9qU-CT-xS7"/>
+                            <constraint firstItem="br6-jJ-tw8" firstAttribute="leading" secondItem="UIq-6H-p97" secondAttribute="leading" constant="16" id="XHy-hH-RZ7"/>
+                            <constraint firstItem="qCa-Sg-6Bd" firstAttribute="top" secondItem="UIq-6H-p97" secondAttribute="top" constant="17" id="evL-on-Dlu"/>
+                            <constraint firstItem="qCa-Sg-6Bd" firstAttribute="centerX" secondItem="br6-jJ-tw8" secondAttribute="centerX" id="t2g-pO-fMg"/>
+                            <constraint firstItem="UIq-6H-p97" firstAttribute="trailing" secondItem="br6-jJ-tw8" secondAttribute="trailing" constant="16" id="wty-1b-WrF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UIq-6H-p97"/>
                     </view>
                     <navigationItem key="navigationItem" id="kKC-RH-7LR"/>
+                    <connections>
+                        <outlet property="songTableView" destination="br6-jJ-tw8" id="vhb-sH-bkl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0jR-4q-jx7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

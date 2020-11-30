@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         var musicRequest = URLRequest(url: musicURL)
         musicRequest.httpMethod = "GET"
         musicRequest.addValue("Bearer \(self.developerToken)", forHTTPHeaderField: "Authorization")
-        musicRequest.addValue(token, forHTTPHeaderField: "Music-User-Token")
+//        musicRequest.addValue(token, forHTTPHeaderField: "Music-User-Token")
         
         URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
             guard error == nil else { return }
@@ -46,21 +46,21 @@ class ViewController: UIViewController {
                 return
             }
             //fetching and setting the JSON array
-            if let json = try? JSON(data: data) {
-                guard let results = (json["results"]["songs"]["data"]).array else {
-                    print("not able to fetch results")
-                    return
-                }
-                let result = results
-                for song in result {
-                    let attributes = song["attributes"]
-                    let currentSong = Song(id: attributes["playParams"]["id"].string!, name: attributes["name"].string!, artistName: attributes["artistName"].string!, artworkURL: attributes["artwork"]["url"].string!)
-                    songs.append(currentSong)
-                }
-                completion(songs)
-            } else {
-                completion(songs)
-            }
+//            if let json = try? JSON(data: data) {
+//                guard let results = (json["results"]["songs"]["data"]).array else {
+//                    print("not able to fetch results")
+//                    return
+//                }
+//                let result = results
+//                for song in result {
+//                    let attributes = song["attributes"]
+//                    let currentSong = Song(id: attributes["playParams"]["id"].string!, name: attributes["name"].string!, artistName: attributes["artistName"].string!, artworkURL: attributes["artwork"]["url"].string!)
+//                    songs.append(currentSong)
+//                }
+//                completion(songs)
+//            } else {
+//                completion(songs)
+//            }
         }.resume()
         
     }

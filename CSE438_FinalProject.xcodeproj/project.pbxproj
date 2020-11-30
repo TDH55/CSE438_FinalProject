@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5648E5CC2574AD81004DC7AB /* SongListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648E5CB2574AD81004DC7AB /* SongListVC.swift */; };
 		56C337502567887D00F4F95F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3374F2567887D00F4F95F /* HomeViewController.swift */; };
 		56C33756256789DC00F4F95F /* KolodaViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33755256789DC00F4F95F /* KolodaViewDataSource.swift */; };
 		56C3375825678A2800F4F95F /* KolodaViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3375725678A2800F4F95F /* KolodaViewDelegate.swift */; };
@@ -22,12 +23,12 @@
 		56E4323B256327680088D117 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56E4323A256327680088D117 /* Assets.xcassets */; };
 		56E4323E256327680088D117 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56E4323C256327680088D117 /* LaunchScreen.storyboard */; };
 		6B76E40D90E50A233D58D2C3 /* Pods_CSE438_FinalProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A245657BEAD0F8E67C4F343E /* Pods_CSE438_FinalProject.framework */; };
-		CFAEE12125749D6E008320BA /* LikeListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAEE12025749D6E008320BA /* LikeListTableViewController.swift */; };
 		CFAEE1252574A676008320BA /* LyricsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFAEE1242574A676008320BA /* LyricsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1E26C55984F45C5FC9A0B524 /* Pods-CSE438_FinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSE438_FinalProject.debug.xcconfig"; path = "Target Support Files/Pods-CSE438_FinalProject/Pods-CSE438_FinalProject.debug.xcconfig"; sourceTree = "<group>"; };
+		5648E5CB2574AD81004DC7AB /* SongListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListVC.swift; sourceTree = "<group>"; };
 		56C3374F2567887D00F4F95F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		56C33755256789DC00F4F95F /* KolodaViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KolodaViewDataSource.swift; sourceTree = "<group>"; };
 		56C3375725678A2800F4F95F /* KolodaViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KolodaViewDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +47,6 @@
 		56E4323F256327680088D117 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8580FD274CFA0EDCA76C9777 /* Pods-CSE438_FinalProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSE438_FinalProject.release.xcconfig"; path = "Target Support Files/Pods-CSE438_FinalProject/Pods-CSE438_FinalProject.release.xcconfig"; sourceTree = "<group>"; };
 		A245657BEAD0F8E67C4F343E /* Pods_CSE438_FinalProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CSE438_FinalProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CFAEE12025749D6E008320BA /* LikeListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeListTableViewController.swift; sourceTree = "<group>"; };
 		CFAEE1242574A676008320BA /* LyricsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LyricsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,7 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				CFAEE1242574A676008320BA /* LyricsViewController.swift */,
-				CFAEE12025749D6E008320BA /* LikeListTableViewController.swift */,
+				5648E5CB2574AD81004DC7AB /* SongListVC.swift */,
 				56C337512567895300F4F95F /* HomeViewController */,
 				56E43235256327660088D117 /* ViewController.swift */,
 			);
@@ -280,9 +280,9 @@
 				56E43236256327660088D117 /* ViewController.swift in Sources */,
 				56E43232256327660088D117 /* AppDelegate.swift in Sources */,
 				56C337612567926600F4F95F /* APIResponse.swift in Sources */,
-				CFAEE12125749D6E008320BA /* LikeListTableViewController.swift in Sources */,
 				56C3375F2567903200F4F95F /* Artist.swift in Sources */,
 				56E43234256327660088D117 /* SceneDelegate.swift in Sources */,
+				5648E5CC2574AD81004DC7AB /* SongListVC.swift in Sources */,
 				56C3375825678A2800F4F95F /* KolodaViewDelegate.swift in Sources */,
 				56C33756256789DC00F4F95F /* KolodaViewDataSource.swift in Sources */,
 				56C337502567887D00F4F95F /* HomeViewController.swift in Sources */,
