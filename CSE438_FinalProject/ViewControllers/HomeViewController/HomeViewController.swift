@@ -8,6 +8,7 @@
 
 import UIKit
 import Koloda
+import StoreKit
 
 class HomeViewController: UIViewController {
     
@@ -43,6 +44,17 @@ class HomeViewController: UIViewController {
 //        songCardView.dataSource = self
         
         //TODO: load songs
+        //request authorization for music api
+        SKCloudServiceController.requestAuthorization { status in
+            print("handling request")
+            print(status.rawValue)
+            if status == .authorized {
+                print("fetching storefront")
+                print(apiManager().fetchStorefrontID())
+                print("fetch done")
+            }
+        }
+        
     }
     
 

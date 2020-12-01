@@ -7,4 +7,6 @@ target 'CSE438_FinalProject' do
 
   # Pods for CSE438_FinalProject
   pod "Koloda"
+  pod 'SwiftyJSON', '~> 4.0'
 end
+
