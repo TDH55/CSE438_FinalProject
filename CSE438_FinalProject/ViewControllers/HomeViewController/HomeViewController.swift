@@ -11,7 +11,8 @@ import Koloda
 import StoreKit
 
 class HomeViewController: UIViewController {
-    
+    let developerToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlQ1M1NRTjU1NzkifQ.eyJpc3MiOiJCM1FYR0YyTjhZIiwiZXhwIjoxNjIyNjI0NTUxLCJpYXQiOjE2MDY4NjAxNTF9.wQT7V4REmD67PYHf99pXwP6OE7AVf_NjU75KfMwQIw747QHOM4my-228zfTXRINrtSB8uTb1_C6RM2D-h6Q0NA"
+
     @IBOutlet weak var songCardView: KolodaView!
     
     var songList: [Song] = []
@@ -45,15 +46,26 @@ class HomeViewController: UIViewController {
         
         //TODO: load songs
         //request authorization for music api
-        SKCloudServiceController.requestAuthorization { status in
-            print("handling request")
-            print(status.rawValue)
-            if status == .authorized {
-                print("fetching storefront")
-                print(apiManager().fetchStorefrontID())
-                print("fetch done")
+        //setup apiManager - janky way because I couln't get DispatchSephamores to work
+        let thisApiManger =  apiManager()
+        var userToken = String()
+        SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken){ (recievedToken, error) in
+            print("request user token")
+            guard error == nil else {
+                print(error)
+                print("error")
+                return
+            }
+            if let token = recievedToken{
+                userToken = token
+//                lock.signal() //tells thread it can execute the rest of the code
+                thisApiManger.userToken = userToken
+                print(userToken)
+                thisApiManger.fetchStorefrontID()
+//                lock.signal()
             }
         }
+
         
     }
     

@@ -13,36 +13,75 @@ import SwiftyJSON
 
 
 class apiManager{
-    let developerToken = "b'eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlQ1M1NRTjU1NzkifQ.eyJpc3MiOiJCM1FYR0YyTjhZIiwiZXhwIjoxNjIyNjI0NTUxLCJpYXQiOjE2MDY4NjAxNTF9.wQT7V4REmD67PYHf99pXwP6OE7AVf_NjU75KfMwQIw747QHOM4my-228zfTXRINrtSB8uTb1_C6RM2D-h6Q0NA'"
+    let developerToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlQ1M1NRTjU1NzkifQ.eyJpc3MiOiJCM1FYR0YyTjhZIiwiZXhwIjoxNjIyNjI0NTUxLCJpYXQiOjE2MDY4NjAxNTF9.wQT7V4REmD67PYHf99pXwP6OE7AVf_NjU75KfMwQIw747QHOM4my-228zfTXRINrtSB8uTb1_C6RM2D-h6Q0NA"
     let controller = SKCloudServiceController()
-    func getUserToken() -> String{
-        print("getting user token")
+    var userToken: String?
+    
+//    init(userToken: String) {
+//        self.userToken = userToken
+//    }
+    
+//    func getUserToken() -> String{
+//        print("getting user token")
+//        var userToken = String()
+//
+//        //if this causes issues look into switching it to a dispatchque
+//        let lock = DispatchSemaphore(value: 0)
+//
+//        //this is asynchronous, lock tells the thread to wait for a signal
+////        SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken){ (recievedToken, error) in
+////            print("request user token")
+////            guard error == nil else {
+////                print(error!.localizedDescription)
+////                return
+////            }
+////            if let token = recievedToken{
+////                userToken = token
+////                lock.signal() //tells thread it can execute the rest of the code
+////            }
+////        }
+//        let handler: (String?, Error?) -> Void = { (receivedToken, error) in
+//            print("here")
+//            lock.signal()
+//        }
+//
+//        SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken, completionHandler: handler)
+//
+//
+//
+//
+////
+//        lock.wait() //wait for the signal before returning
+//        print("this shouldn't print")
+//        return userToken
+//    }
+    
+    func getUserToken() -> String {
         var userToken = String()
-        
-        //if this causes issues look into switching it to a dispatchque
+     
+        // 1
         let lock = DispatchSemaphore(value: 0)
-        
-        //this is asynchronous, lock tells the thread to wait for a signal
-        
-        SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken){ (recievedToken, error) in
-            print("request user token")
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            if let token = recievedToken{
+     
+        // 2
+        controller.requestUserToken(forDeveloperToken: developerToken) { (receivedToken, error) in
+            // 3
+            print("kinda")
+            guard error == nil else { return }
+            if let token = receivedToken {
                 userToken = token
-                lock.signal() //tells thread it can execute the rest of the code
+                lock.signal()
             }
         }
-        
-        
-        lock.wait() //wait for the signal before returning
+     
+        // 4
+        lock.wait()
         return userToken
     }
     
-    
     func fetchStorefrontID() -> String {
+        
+        guard userToken != nil else { return ""}
+        
         let lock = DispatchSemaphore(value: 0)
         var storefrontID: String!
         
@@ -51,7 +90,7 @@ class apiManager{
         
         musicRequest.httpMethod = "GET"
         musicRequest.addValue("Bearer \(developerToken)", forHTTPHeaderField: "Authorization")
-        musicRequest.addValue(getUserToken(), forHTTPHeaderField: "Music-User-Token")
+        musicRequest.addValue(userToken!, forHTTPHeaderField: "Music-User-Token")
 
         URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
             print("url session")
