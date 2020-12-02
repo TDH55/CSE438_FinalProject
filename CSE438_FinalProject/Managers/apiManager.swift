@@ -17,45 +17,6 @@ class apiManager{
     let controller = SKCloudServiceController()
     var userToken: String?
     
-//    init(userToken: String) {
-//        self.userToken = userToken
-//    }
-    
-//    func getUserToken() -> String{
-//        print("getting user token")
-//        var userToken = String()
-//
-//        //if this causes issues look into switching it to a dispatchque
-//        let lock = DispatchSemaphore(value: 0)
-//
-//        //this is asynchronous, lock tells the thread to wait for a signal
-////        SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken){ (recievedToken, error) in
-////            print("request user token")
-////            guard error == nil else {
-////                print(error!.localizedDescription)
-////                return
-////            }
-////            if let token = recievedToken{
-////                userToken = token
-////                lock.signal() //tells thread it can execute the rest of the code
-////            }
-////        }
-//        let handler: (String?, Error?) -> Void = { (receivedToken, error) in
-//            print("here")
-//            lock.signal()
-//        }
-//
-//        SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken, completionHandler: handler)
-//
-//
-//
-//
-////
-//        lock.wait() //wait for the signal before returning
-//        print("this shouldn't print")
-//        return userToken
-//    }
-    
     func fetchStorefrontID() -> String {
         
         guard userToken != nil else { return ""}
@@ -71,7 +32,6 @@ class apiManager{
         musicRequest.addValue(userToken!, forHTTPHeaderField: "Music-User-Token")
 
         URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
-            print("url session")
             guard error == nil else{
                 print(error!.localizedDescription)
                 return
@@ -84,7 +44,6 @@ class apiManager{
                 
                 storefrontID = id.stringValue
                 lock.signal()
-                //TODO: parse the json and lock.signal()
             }
         }.resume()
         

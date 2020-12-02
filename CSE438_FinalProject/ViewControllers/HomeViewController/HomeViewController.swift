@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
 //        navigationController?.pushViewController(songListVC, animated: true)
     }
     
+    //TODO: Somethings wrong here when running on device - could be a storyboard issue
     @IBAction func lyricsButton(_ sender: Any) {
 //        let lyricsVC = LyricsViewController()
 //        navigationController?.pushViewController(lyricsVC, animated: true)
@@ -40,6 +41,7 @@ class HomeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         
+        //TODO: Set up cards so these don't cause errors
         //set up card view
 //        songCardView.delegate = self
 //        songCardView.dataSource = self
@@ -47,22 +49,18 @@ class HomeViewController: UIViewController {
         //TODO: load songs
         //request authorization for music api
         //setup apiManager - janky way because I couln't get DispatchSephamores to work
+        //IMPORTANT!!! this is not a real implementation, we need to check for permission and ask if needed, and then load songs
         let thisApiManger =  apiManager()
         var userToken = String()
         SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken){ (recievedToken, error) in
-            print("request user token")
             guard error == nil else {
-                print(error)
-                print("error")
+                print(error!)
                 return
             }
             if let token = recievedToken{
                 userToken = token
-//                lock.signal() //tells thread it can execute the rest of the code
                 thisApiManger.userToken = userToken
-                print(userToken)
-                thisApiManger.fetchStorefrontID()
-//                lock.signal()
+                print(thisApiManger.fetchStorefrontID())
             }
         }
 
