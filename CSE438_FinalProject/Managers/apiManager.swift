@@ -56,28 +56,6 @@ class apiManager{
 //        return userToken
 //    }
     
-    func getUserToken() -> String {
-        var userToken = String()
-     
-        // 1
-        let lock = DispatchSemaphore(value: 0)
-     
-        // 2
-        controller.requestUserToken(forDeveloperToken: developerToken) { (receivedToken, error) in
-            // 3
-            print("kinda")
-            guard error == nil else { return }
-            if let token = receivedToken {
-                userToken = token
-                lock.signal()
-            }
-        }
-     
-        // 4
-        lock.wait()
-        return userToken
-    }
-    
     func fetchStorefrontID() -> String {
         
         guard userToken != nil else { return ""}
@@ -100,7 +78,12 @@ class apiManager{
             }
             
             if let json = try? JSON(data: data!){
-                print(json.rawString()!)
+//                print(json.rawString()!)
+                let result = (json["data"]).array!
+                let id = (result[0].dictionaryValue)["id"]!
+                
+                storefrontID = id.stringValue
+                lock.signal()
                 //TODO: parse the json and lock.signal()
             }
         }.resume()
@@ -108,5 +91,7 @@ class apiManager{
         lock.wait() //wait for the signal before returning the id
         return storefrontID
     }
+    
+    //TODO: implement music stuff
     
 }
