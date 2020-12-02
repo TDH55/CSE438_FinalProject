@@ -52,5 +52,40 @@ class apiManager{
     }
     
     //TODO: implement music stuff
+    func fetchSongs() -> [Song] {
+        print("fetching songs")
+        guard userToken != nil else { return [] }
+        //TODO: get 5 random seeds from the data storage
+        //if less than 5 liked songs, get default recommendations
+        let lock = DispatchSemaphore(value: 0)
+        var songs = [Song]()
+        
+        //TODO: implment api request
+        //make sure that the reccomendation is not already in the like/dislike database, get another rec if it is
+        //this is using default recommendations
+        //TODO: change from default recommendations
+        let musicURL = URL(string: "https://api.music.apple.com/v1/me/recommendations")!
+        var musicRequest = URLRequest(url: musicURL)
+        musicRequest.httpMethod = "GET"
+        musicRequest.addValue("Bearer \(developerToken)", forHTTPHeaderField: "Authorization")
+        musicRequest.addValue(userToken!, forHTTPHeaderField: "Music-User-Token")
+        
+        URLSession.shared.dataTask(with: musicRequest) { (data, response, error) in
+            print("url session")
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            if let json = try? JSON(data: data!){
+                print(json.rawString()!)
+                //TODO: update songs array and call lock.signal()
+            }
+            
+        }.resume()
+        
+        lock.wait()
+        return songs
+    }
     
 }
