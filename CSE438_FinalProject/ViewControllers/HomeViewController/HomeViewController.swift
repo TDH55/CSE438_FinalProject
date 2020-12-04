@@ -51,25 +51,7 @@ class HomeViewController: UIViewController {
         //setup apiManager - janky way because I couln't get DispatchSephamores to work
         //IMPORTANT!!! this is not a real implementation, we need to check for permission and ask if needed, and then load songs
         let thisApiManger =  apiManager()
-        var userToken = String()
-//        let lock = DispatchSemaphore(value: 0)
-        SKCloudServiceController().requestUserToken(forDeveloperToken: developerToken){ (recievedToken, error) in
-            guard error == nil else {
-                print(error!)
-                return
-            }
-            if let token = recievedToken{
-                userToken = token
-                thisApiManger.userToken = userToken
-                print(thisApiManger.fetchStorefrontID())
-//                lock.signal()
-                thisApiManger.fetchSongs()
-            }
-        }
-//        print("waiting")
-//        lock.wait()
-        
-//        thisApiManger.fetchSongs()
+
         
     }
     
