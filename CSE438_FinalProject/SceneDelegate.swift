@@ -11,6 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate {
 
     var window: UIWindow?
+    let apiManager = APIManager()
     
     let clientId = "ca053ac2d1be4bffb8c70cbc9e8a8a3e"
     let spotifyRedirectURL = URL(string: "MusicMatch://returnAfterLogin")!
@@ -35,11 +36,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        if let _ = self.appRemote.connectionParameters.accessToken {
+            self.appRemote.connect()
+            apiManager.pause()
+//            apiManager.getCards()
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        print("resign")
+        if(self.appRemote.isConnected){
+            self.appRemote.disconnect()
+        }
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -76,11 +86,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
             // Show the error
             print(error_description)
         }
+        
         appRemote.connect()
     }
     
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
         print("connected")
+        self.appRemote.playerAPI?.delegate = self
+        self.appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in
+            if let error = error {
+                debugPrint(error.localizedDescription)
+            }
+        })
     }
 
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
@@ -96,6 +113,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
     
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
         print("player state changed")
+        debugPrint("Track name: %@", playerState.track.name)
     }
+    
 }
 

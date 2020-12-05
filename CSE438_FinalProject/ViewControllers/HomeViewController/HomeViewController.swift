@@ -64,6 +64,7 @@ class HomeViewController: UIViewController {
         //if auth fails, retry
         DispatchQueue.main.async {
             self.apiManager.connect()
+//            self.apiManager.getCards()
         }
 //        apiManager.connect()
 //        self.appRemote!.authorizeAndPlayURI("")
