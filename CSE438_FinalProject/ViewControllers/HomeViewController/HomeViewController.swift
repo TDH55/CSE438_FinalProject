@@ -11,7 +11,16 @@ import Koloda
 import StoreKit
 
 class HomeViewController: UIViewController {
-    let developerToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJFUzI1NiIsImtpZCI6IlQ1M1NRTjU1NzkifQ.eyJpc3MiOiJCM1FYR0YyTjhZIiwiZXhwIjoxNjIyNjI0NTUxLCJpYXQiOjE2MDY4NjAxNTF9.wQT7V4REmD67PYHf99pXwP6OE7AVf_NjU75KfMwQIw747QHOM4my-228zfTXRINrtSB8uTb1_C6RM2D-h6Q0NA"
+    
+//    var appRemote: SPTAppRemote? {
+//        get {
+//            return (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.appRemote
+//        }
+//    }
+    
+    let apiManager = APIManager()
+//    let appRemote = apiManager.appRemote
+//    var appRemote: SPTAppRemote?
 
     @IBOutlet weak var songCardView: KolodaView!
     
@@ -38,7 +47,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         //TODO: Set up cards so these don't cause errors
@@ -50,9 +59,14 @@ class HomeViewController: UIViewController {
         //request authorization for music api
         //setup apiManager - janky way because I couln't get DispatchSephamores to work
         //IMPORTANT!!! this is not a real implementation, we need to check for permission and ask if needed, and then load songs
-        let thisApiManger =  apiManager()
-
         
+        //TODO: check if authorized, and authorize user if they are not
+        //if auth fails, retry
+        DispatchQueue.main.async {
+            self.apiManager.connect()
+        }
+//        apiManager.connect()
+//        self.appRemote!.authorizeAndPlayURI("")
     }
     
 

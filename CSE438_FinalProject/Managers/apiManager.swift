@@ -12,8 +12,16 @@ import StoreKit
 import SwiftyJSON
 
 
-class apiManager{
-    let clientId = "ca053ac2d1be4bffb8c70cbc9e8a8a3e"
-    let spotifyRedirectURL = URL(string: "https://spotify.com")
+class APIManager{
+    var appRemote: SPTAppRemote? {
+        get {
+            return (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.appRemote
+        }
+    }
+    
+    func connect() {
+        appRemote?.authorizeAndPlayURI("")
+//        appRemote?.connect()
+    }
     
 }
