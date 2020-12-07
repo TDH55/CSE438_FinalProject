@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-CSE438_FinalProject/Pods-CSE438_FinalProject-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Koloda/Koloda.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
+${BUILT_PRODUCTS_DIR}/pop/pop.framework
