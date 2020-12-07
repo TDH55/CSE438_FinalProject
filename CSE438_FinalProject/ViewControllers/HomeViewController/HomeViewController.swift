@@ -18,9 +18,10 @@ class HomeViewController: UIViewController {
 //        }
 //    }
     
-    let apiManager = APIManager()
+    let apiManager = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.apiManager
 //    let appRemote = apiManager.appRemote
 //    var appRemote: SPTAppRemote?
+    
 
     @IBOutlet weak var songCardView: KolodaView!
     
@@ -47,6 +48,9 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard apiManager != nil else { return }
+
+        
         
         // Do any additional setup after loading the view.
         
@@ -62,12 +66,11 @@ class HomeViewController: UIViewController {
         
         //TODO: check if authorized, and authorize user if they are not
         //if auth fails, retry
+        
         DispatchQueue.main.async {
-            self.apiManager.connect()
-//            self.apiManager.getCards()
+            self.apiManager!.connect()
         }
-//        apiManager.connect()
-//        self.appRemote!.authorizeAndPlayURI("")
+
     }
     
 

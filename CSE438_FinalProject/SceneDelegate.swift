@@ -98,7 +98,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
             }
         })
         self.apiManager.userToken = self.accessToken
-//        self.apiManager.getCards()
         self.apiManager.getRecs()
     }
 
