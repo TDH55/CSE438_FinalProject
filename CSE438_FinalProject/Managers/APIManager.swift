@@ -31,6 +31,8 @@ class APIManager{
         }
     }
     
+    var userToken: String = ""
+    
     var trackURI: String = ""
     var songs: [Song] = []
     
@@ -55,10 +57,47 @@ class APIManager{
     
     func getCards() -> [Song] {
         print("get cards")
-        appRemote?.contentAPI?.fetchRecommendedContentItems(forType: "track", flattenContainers: true) {(result, error) in
-            guard error == nil else { return }
-            print(result)
+        appRemote?.contentAPI?.fetchRecommendedContentItems(forType: SPTAppRemoteContentTypeDefault, flattenContainers: true) {(items, error) in
+//            guard error == nil else {
+//                print(error)
+////                return songs
+//            }
+            if let contentItems = items as? [SPTAppRemoteContentItem]{
+                print(contentItems)
+            }
+//            print(result)
         }
         return songs
+    }
+    
+    func getRecs() {
+        print("getRecs")
+        print(userToken)
+        let lock = DispatchSemaphore(value: 0)
+        let parameters: String = "limit=3&market=US&seed_artists=\("4NHQUGzhtTLFvgF5SZesLK")&seed_tracks=\("0c6xIDDpzE81m2q797ordA&m")" //TODO: fill parameters
+        let recommendationURL = URL(string: "https://api.spotify.com/v1/recommendations?\(parameters)")!
+        var recommendationRequest = URLRequest(url: recommendationURL)
+        
+        recommendationRequest.httpMethod = "GET"
+        recommendationRequest.addValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: recommendationRequest) { (data, response, error) in
+            print("url session")
+            guard error == nil else {
+                print("error: \(error)")
+                return
+            }
+            
+            if let json = try? JSON(data: data!){
+                print(json)
+//                print(json.dictionaryObject!["tracks"])
+            }
+            
+//            print(response)
+            lock.signal()
+        }.resume()
+        
+        lock.wait()
+        return
     }
 }

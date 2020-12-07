@@ -10,6 +10,28 @@
 //and used https://github.com/Rohan-cod/EmMusicPlayer/blob/main/EmMusicPlayer/Controller/AppleMusicAPI.swift
 
 import Foundation
-import StoreKit
 
+struct APIResponse: Decodable {
+    
+}
 
+struct Track: Decodable {
+    let id: String
+    let album: Album
+    let duration_ms: Int
+    let uri: String
+    let artists: [Artist]
+    let name: String
+}
+
+struct Album: Decodable {
+    
+}
+
+struct Artist: Decodable {
+    
+}
+
+struct Seed: Decodable{
+    
+}
