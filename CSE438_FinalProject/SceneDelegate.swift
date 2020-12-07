@@ -71,7 +71,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
     }()
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        print("1")
+//        print("1")
         guard let url = URLContexts.first?.url else {
             return
         }
@@ -79,7 +79,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
         let parameters = appRemote.authorizationParameters(from: url);
 
         if let access_token = parameters?[SPTAppRemoteAccessTokenKey] {
-            print(access_token)
             appRemote.connectionParameters.accessToken = access_token
             self.accessToken = access_token
         } else if let error_description = parameters?[SPTAppRemoteErrorDescriptionKey] {
@@ -98,6 +97,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
                 debugPrint(error.localizedDescription)
             }
         })
+        self.apiManager.userToken = self.accessToken
+//        self.apiManager.getCards()
+        self.apiManager.getRecs()
     }
 
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
