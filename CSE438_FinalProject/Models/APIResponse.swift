@@ -12,7 +12,8 @@
 import Foundation
 
 struct APIResponse: Decodable {
-    
+    let tracks: [Track]
+    let seeds: [Seed]
 }
 
 struct Track: Decodable {
@@ -25,13 +26,28 @@ struct Track: Decodable {
 }
 
 struct Album: Decodable {
+    let uri: String
+    let artists: [Artist]
+    let images: [AlbumImage]
+    let id: String
+    let name: String
     
 }
 
 struct Artist: Decodable {
-    
+    let name: String
+    let type: String
+    let uri: String
+    let id: String
 }
 
 struct Seed: Decodable{
-    
+    let type: String
+    let id: String
+}
+
+struct AlbumImage: Decodable{
+    let url: String
+    let width: Int
+    let height: Int
 }
