@@ -80,20 +80,23 @@ class APIManager{
         
         recommendationRequest.httpMethod = "GET"
         recommendationRequest.addValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
+        var apiResponse: APIResponse?
         
         URLSession.shared.dataTask(with: recommendationRequest) { (data, response, error) in
             print("url session")
             guard error == nil else {
-                print("error: \(error)")
+                print("error: \(String(describing: error))")
                 return
             }
             
-            if let json = try? JSON(data: data!){
-                print(json)
-//                print(json.dictionaryObject!["tracks"])
+            do {
+                guard data != nil else { return }
+                apiResponse = try JSONDecoder().decode(APIResponse.self, from: data!)
+                print(apiResponse!)
+            }catch let error {
+                print("error decoding api response: \(error)")
             }
             
-//            print(response)
             lock.signal()
         }.resume()
         
