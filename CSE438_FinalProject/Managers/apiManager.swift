@@ -51,7 +51,7 @@ class APIManager{
     
     
     func getRecs() {
-        //TODO: if cordata is empty, execute random query
+        //TODO: if cordata is empty, execute random query, else set parameters based on 5 random songs/artists
         let lock = DispatchSemaphore(value: 0)
         let parameters: String = "limit=3&market=US&seed_artists=\("4NHQUGzhtTLFvgF5SZesLK")&seed_tracks=\("0c6xIDDpzE81m2q797ordA&m")" //TODO: fill parameters
         let recommendationURL = URL(string: "https://api.spotify.com/v1/recommendations?\(parameters)")!

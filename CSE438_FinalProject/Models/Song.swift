@@ -9,7 +9,7 @@
 import Foundation
 
 struct Song: Decodable{
-    //TODO: check if we can change these names
+    //TODO: add artist id
     let id: String
     let name: String //title
     let artistName: String
