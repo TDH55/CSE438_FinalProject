@@ -91,6 +91,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
     
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
         print("connected")
+        self.apiManager.songs = []
         self.appRemote.playerAPI?.delegate = self
         self.appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in
             if let error = error {

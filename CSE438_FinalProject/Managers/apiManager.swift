@@ -11,7 +11,7 @@
 import StoreKit
 import SwiftyJSON
 
-//TODO: make a singleton?
+//TODO: set as kolada view data source?
 
 class APIManager{
         
@@ -25,7 +25,6 @@ class APIManager{
         get {
             return {[weak self] _, error in
                 if let error = error {
-//                    self?.displayError(error as NSError)
                     print(error)
                 }
             }
@@ -37,15 +36,9 @@ class APIManager{
     var trackURI: String = ""
     var songs: [Song] = []
     
-//    private func displayError(_ error: NSError?) {
-//        if let error = error {
-//            presentAlert(title: "Error", message: error.description)
-//        }
-//    }
-    
+
     func connect() {
         appRemote?.authorizeAndPlayURI(trackURI)
-//        appRemote?.connect()
     }
     
     func pause() {
@@ -56,24 +49,9 @@ class APIManager{
         appRemote?.playerAPI?.play(trackURI, callback: defaultCallback)
     }
     
-    func getCards() -> [Song] {
-        print("get cards")
-        appRemote?.contentAPI?.fetchRecommendedContentItems(forType: SPTAppRemoteContentTypeDefault, flattenContainers: true) {(items, error) in
-//            guard error == nil else {
-//                print(error)
-////                return songs
-//            }
-            if let contentItems = items as? [SPTAppRemoteContentItem]{
-                print(contentItems)
-            }
-//            print(result)
-        }
-        return songs
-    }
     
     func getRecs() {
-        print("getRecs")
-        print(userToken)
+        //TODO: if cordata is empty, execute random query
         let lock = DispatchSemaphore(value: 0)
         let parameters: String = "limit=3&market=US&seed_artists=\("4NHQUGzhtTLFvgF5SZesLK")&seed_tracks=\("0c6xIDDpzE81m2q797ordA&m")" //TODO: fill parameters
         let recommendationURL = URL(string: "https://api.spotify.com/v1/recommendations?\(parameters)")!
@@ -98,6 +76,7 @@ class APIManager{
                     let song = Song(id: track.id, name: track.name, artistName: track.artists[0].name, artworkURL: track.album.images[1].url, artworkHeight: track.album.images[1].height, artworkWidth: track.album.images[1].width, duration: track.duration_ms, uri: track.uri)
                     self.songs.append(song)
                 }
+                print("songs \(self.songs), \(self.songs.count)")
                 print(apiResponse!)
             }catch let error {
                 print("error decoding api response: \(error)")
