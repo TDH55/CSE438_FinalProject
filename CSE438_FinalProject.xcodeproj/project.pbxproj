@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5621B048257EFF1B00F0B669 /* Responses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5621B046257EFF1B00F0B669 /* Responses.xcdatamodeld */; };
+		5621B05625808DDD00F0B669 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621B05525808DDD00F0B669 /* APIManager.swift */; };
 		56336914257AFCEB004B2D9A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56336913257AFCEB004B2D9A /* LoginViewController.swift */; };
 		5648E5CC2574AD81004DC7AB /* SongListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648E5CB2574AD81004DC7AB /* SongListVC.swift */; };
-		56915E5F2576DD6300AF3973 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56915E5E2576DD6300AF3973 /* APIManager.swift */; };
 		56A5D406257AF5B80019DE8D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A5D405257AF5B80019DE8D /* SpotifyiOS.framework */; };
 		56C337502567887D00F4F95F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3374F2567887D00F4F95F /* HomeViewController.swift */; };
 		56C33756256789DC00F4F95F /* KolodaViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33755256789DC00F4F95F /* KolodaViewDataSource.swift */; };
@@ -33,9 +33,9 @@
 /* Begin PBXFileReference section */
 		1E26C55984F45C5FC9A0B524 /* Pods-CSE438_FinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSE438_FinalProject.debug.xcconfig"; path = "Target Support Files/Pods-CSE438_FinalProject/Pods-CSE438_FinalProject.debug.xcconfig"; sourceTree = "<group>"; };
 		5621B047257EFF1B00F0B669 /* Responses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Responses.xcdatamodel; sourceTree = "<group>"; };
+		5621B05525808DDD00F0B669 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		56336913257AFCEB004B2D9A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5648E5CB2574AD81004DC7AB /* SongListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListVC.swift; sourceTree = "<group>"; };
-		56915E5E2576DD6300AF3973 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		56A5D405257AF5B80019DE8D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		56A5D409257AF74E0019DE8D /* CSE438_FinalProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CSE438_FinalProject-Bridging-Header.h"; sourceTree = "<group>"; };
 		56C3374F2567887D00F4F95F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -89,10 +89,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		56915E5D2576DD4500AF3973 /* Managers */ = {
+		5621B05425808DD400F0B669 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				56915E5E2576DD6300AF3973 /* APIManager.swift */,
+				5621B05525808DDD00F0B669 /* APIManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -169,7 +169,7 @@
 		56E43230256327660088D117 /* CSE438_FinalProject */ = {
 			isa = PBXGroup;
 			children = (
-				56915E5D2576DD4500AF3973 /* Managers */,
+				5621B05425808DD400F0B669 /* Managers */,
 				56E43231256327660088D117 /* AppDelegate.swift */,
 				56E43233256327660088D117 /* SceneDelegate.swift */,
 				56C3375925678D6700F4F95F /* Models */,
@@ -299,8 +299,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5621B05625808DDD00F0B669 /* APIManager.swift in Sources */,
 				5621B048257EFF1B00F0B669 /* Responses.xcdatamodeld in Sources */,
-				56915E5F2576DD6300AF3973 /* APIManager.swift in Sources */,
 				56C3375B25678D7A00F4F95F /* Song.swift in Sources */,
 				56E43236256327660088D117 /* ViewController.swift in Sources */,
 				56336914257AFCEB004B2D9A /* LoginViewController.swift in Sources */,

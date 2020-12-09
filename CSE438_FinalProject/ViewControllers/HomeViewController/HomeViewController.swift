@@ -1,4 +1,4 @@
-//
+
 //  HomeViewController.swift
 //  CSE438_FinalProject
 //
@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet weak var songCardView: KolodaView!
     
+    
     var songList: [Song] = []
     
     @IBAction func dislikeButton(_ sender: Any) {
@@ -48,6 +49,14 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let sceneDelegate = windowScene.delegate as? SceneDelegate else {
+            return
+        }
+        
+        sceneDelegate.homeViewController = self
+        
         guard apiManager != nil else { return }
 
         
@@ -56,8 +65,8 @@ class HomeViewController: UIViewController {
         
         //TODO: Set up cards so these don't cause errors
         //set up card view
-//        songCardView.delegate = self
-//        songCardView.dataSource = self
+        songCardView.delegate = apiManager
+        songCardView.dataSource = apiManager
         
         //TODO: load songs
         //request authorization for music api
