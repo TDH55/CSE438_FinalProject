@@ -101,6 +101,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
         })
         self.apiManager.userToken = self.accessToken
         self.apiManager.getRecs()
+        homeViewController?.songCardView.reloadData()
     }
 
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
