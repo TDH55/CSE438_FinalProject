@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class SongListVC: UIViewController {
     
     @IBOutlet weak var songTableView: UITableView!
+    
+    var songList: [NSManagedObject] = []
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +38,10 @@ class SongListVC: UIViewController {
 
 }
 
+//MARK: table view functions
 extension SongListVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0;
+        return songList.count;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,4 +49,16 @@ extension SongListVC: UITableViewDataSource{
         return cell
     }
     
+}
+
+//MARK: core data functions
+extension SongListVC {
+    func getSongList(){
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SongResponse")
+        do{
+            songList = try context.fetch(fetchRequest)
+        } catch let error {
+            print("Error fetching from core data \(error)")
+        }
+    }
 }

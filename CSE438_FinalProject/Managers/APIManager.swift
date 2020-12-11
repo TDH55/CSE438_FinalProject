@@ -9,6 +9,7 @@
 import StoreKit
 import SwiftyJSON
 import Koloda
+import CoreData
 
 //TODO: set as kolada view data source?
 class APIManager{
@@ -32,6 +33,9 @@ class APIManager{
             }
         }
     }
+    
+    //core data setup
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //set default/initial values
     var userToken: String = ""
@@ -85,7 +89,7 @@ class APIManager{
                 apiResponse = try JSONDecoder().decode(APIResponse.self, from: data!)
                 for track in apiResponse!.tracks {
                     //create song onbject and add to array
-                    let song = Song(id: track.id, name: track.name, artistName: track.artists[0].name, artworkURL: track.album.images[1].url, artworkHeight: track.album.images[1].height, artworkWidth: track.album.images[1].width, duration: track.duration_ms, uri: track.uri)
+                    let song = Song(id: track.id, name: track.name, artistName: track.artists[0].name, artistID: track.artists[0].id, artworkURL: track.album.images[1].url, artworkHeight: track.album.images[1].height, artworkWidth: track.album.images[1].width, duration: track.duration_ms, uri: track.uri)
                     self.songs.append(song)
                 }
             }catch let error {
@@ -134,8 +138,10 @@ extension APIManager: KolodaViewDelegate{
     }
     
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
-        print(songs[index])
-        //TODO: asynchronously add a song to the back of the array everytip a card is swiped
+//        print(songs[index])
+        print(songs.count)
+        print(index)
+        //TODO: asynchronously add a song to the back of the array everytip a card is swiped -> call getSingleRec()
         //TODO: add to likes/dislikes on swipe
         
         switch (direction){
@@ -155,4 +161,32 @@ extension APIManager: KolodaViewDelegate{
     }
     
     
+}
+
+//core data functions
+extension APIManager{
+    func AddResponse(song: Song, liked: Bool){
+        guard let entity = NSEntityDescription.entity(forEntityName: "SongResponse", in: context) else { return  }
+        
+        let songResponse = NSManagedObject(entity: entity, insertInto: context)
+        
+        //set values for song response
+        songResponse.setValue(song.artistID, forKey: "artistID")
+        songResponse.setValue(song.artistName, forKey: "artistName")
+        songResponse.setValue(song.artworkHeight, forKey: "artworkHeight")
+        songResponse.setValue(song.artworkURL, forKey: "artworkURL")
+        songResponse.setValue(song.artworkWidth, forKey: "artworkWidth")
+        songResponse.setValue(song.id, forKey: "id")
+        songResponse.setValue(liked, forKey: "liked")
+        songResponse.setValue(song.name, forKey: "name")
+        songResponse.setValue(song.uri, forKey: "uri")
+        
+        //try catch for persisting save
+        do{
+            try context.save()
+        } catch let error {
+            print("Failed saving to core data: \(error)")
+        }
+        return
+    }
 }

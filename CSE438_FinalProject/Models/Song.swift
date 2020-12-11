@@ -13,16 +13,18 @@ struct Song: Decodable{
     let id: String
     let name: String //title
     let artistName: String
+    let artistID: String
     let artworkURL: String
     let artworkHeight: Int
     let artworkWidth: Int
     let duration: Int
     let uri: String
     
-    init(id: String, name: String, artistName: String, artworkURL: String, artworkHeight: Int, artworkWidth: Int, duration: Int, uri: String){
+    init(id: String, name: String, artistName: String, artistID: String, artworkURL: String, artworkHeight: Int, artworkWidth: Int, duration: Int, uri: String){
         self.id = id
         self.name = name
         self.artistName = artistName
+        self.artistID = artistID
         self.artworkURL = artworkURL
         self.artworkHeight = artworkHeight
         self.artworkWidth = artworkWidth
