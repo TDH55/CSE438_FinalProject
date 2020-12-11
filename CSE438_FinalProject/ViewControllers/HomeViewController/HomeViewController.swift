@@ -30,15 +30,18 @@ class HomeViewController: UIViewController {
     
     @IBAction func dislikeButton(_ sender: Any) {
         //save song data (Core Data) so the song does not repeat
+        songCardView.swipe(.left)
     }
     
     @IBAction func likeButton(_ sender: Any) {
         //from API, add song data to Table View in LikeListTableViewController() - maintain order
+        songCardView.swipe(.right)
     }
     
     @IBAction func songListButton(_ sender: Any) {
 //        let songListVC = SongListVC()
 //        navigationController?.pushViewController(songListVC, animated: true)
+        
     }
     
     //TODO: Somethings wrong here when running on device - could be a storyboard issue
