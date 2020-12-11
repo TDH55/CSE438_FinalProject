@@ -147,8 +147,10 @@ extension APIManager: KolodaViewDelegate{
         switch (direction){
         case .right:
             print("right")
+            AddResponse(song: songs[index], liked: true)
         case .left:
             print("left")
+            AddResponse(song: songs[index], liked: false)
         case .up:
             print("up")
         default:

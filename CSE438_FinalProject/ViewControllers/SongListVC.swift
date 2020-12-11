@@ -21,7 +21,14 @@ class SongListVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        //TODO: dispatch queue
         songTableView.dataSource = self;
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.getSongList()
+            DispatchQueue.main.async {
+                self.songTableView.reloadData()
+            }
+        }
 //        songTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
@@ -45,7 +52,9 @@ extension SongListVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        cell.textLabel!.text = songList[indexPath.row].value(forKey: "name") as? String
+        
         return cell
     }
     
@@ -60,5 +69,7 @@ extension SongListVC {
         } catch let error {
             print("Error fetching from core data \(error)")
         }
+        
+        //TODO: handle images if we want them on this screen
     }
 }
