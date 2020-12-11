@@ -16,6 +16,8 @@ class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dislikeButton: UIButton!
     
+    //TODO: add button functionality and update the button display
+    
 }
 
 class SongListVC: UIViewController {
@@ -39,7 +41,6 @@ class SongListVC: UIViewController {
                 self.songTableView.reloadData()
             }
         }
-//        songTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
     
 
