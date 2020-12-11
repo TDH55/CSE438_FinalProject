@@ -142,14 +142,81 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liked Songs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCa-Sg-6Bd">
-                                <rect key="frame" x="94" y="105" width="226" height="51"/>
+                                <rect key="frame" x="94" y="105" width="226" height="50.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="42"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="br6-jJ-tw8">
-                                <rect key="frame" x="16" y="172" width="382" height="674"/>
+                                <rect key="frame" x="16" y="171.5" width="382" height="674.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="AeU-Ew-B5d" customClass="SongTableViewCell" customModule="CSE438_FinalProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="382" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AeU-Ew-B5d" id="g3G-LT-E3A">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Onl-KF-ZBe">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Onl-KF-ZBe" secondAttribute="height" id="AQ1-jM-5xg"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="yHy-xz-L5p">
+                                                    <rect key="frame" x="116" y="0.0" width="184" height="100"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ZH-BJ-s2U">
+                                                            <rect key="frame" x="0.0" y="0.0" width="92" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyk-Dz-Zec">
+                                                            <rect key="frame" x="0.0" y="50" width="40.5" height="50"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4EE-7B-7tp">
+                                                    <rect key="frame" x="308" y="39" width="58" height="22.5"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDk-Un-bOK">
+                                                            <rect key="frame" x="0.0" y="0.0" width="21" height="22.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <state key="normal" image="hand.thumbsup" catalog="system"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofc-29-XmD">
+                                                            <rect key="frame" x="37" y="0.0" width="21" height="22.5"/>
+                                                            <state key="normal" image="hand.thumbsdown" catalog="system"/>
+                                                        </button>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Onl-KF-ZBe" firstAttribute="leading" secondItem="g3G-LT-E3A" secondAttribute="leading" id="2eH-nr-d1e"/>
+                                                <constraint firstItem="4EE-7B-7tp" firstAttribute="centerY" secondItem="g3G-LT-E3A" secondAttribute="centerY" id="8fl-8Y-N9P"/>
+                                                <constraint firstItem="Onl-KF-ZBe" firstAttribute="top" secondItem="g3G-LT-E3A" secondAttribute="top" id="HQx-Ri-bTL"/>
+                                                <constraint firstAttribute="trailing" secondItem="4EE-7B-7tp" secondAttribute="trailing" constant="16" id="Mln-UR-cTP"/>
+                                                <constraint firstItem="yHy-xz-L5p" firstAttribute="leading" secondItem="Onl-KF-ZBe" secondAttribute="trailing" constant="16" id="RSr-hf-XYv"/>
+                                                <constraint firstAttribute="bottom" secondItem="yHy-xz-L5p" secondAttribute="bottom" id="oCe-Lv-0u6"/>
+                                                <constraint firstItem="4EE-7B-7tp" firstAttribute="leading" secondItem="yHy-xz-L5p" secondAttribute="trailing" constant="8" symbolic="YES" id="pfb-tQ-eSA"/>
+                                                <constraint firstAttribute="bottom" secondItem="Onl-KF-ZBe" secondAttribute="bottom" id="qo3-IM-evx"/>
+                                                <constraint firstItem="yHy-xz-L5p" firstAttribute="top" secondItem="g3G-LT-E3A" secondAttribute="top" id="tdU-Py-fje"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="albumCoverImage" destination="Onl-KF-ZBe" id="KbY-jo-0jh"/>
+                                            <outlet property="dislikeButton" destination="ofc-29-XmD" id="dV9-5A-sJ0"/>
+                                            <outlet property="likeButton" destination="mDk-Un-bOK" id="bFB-hN-fs2"/>
+                                            <outlet property="songArtistLabel" destination="Wyk-Dz-Zec" id="pEh-2L-Rh1"/>
+                                            <outlet property="songTitleLabel" destination="1ZH-BJ-s2U" id="5DQ-GT-7gQ"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UIq-6H-p97"/>
@@ -192,6 +259,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="hand.thumbsdown" catalog="system" width="128" height="128"/>
+        <image name="hand.thumbsup" catalog="system" width="128" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
