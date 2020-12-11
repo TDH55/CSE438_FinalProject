@@ -42,6 +42,7 @@ class APIManager{
     var trackURI: String = ""
     var songs: [Song] = []
     
+    var isPlaying: Bool = true
 
     func connect() {
         appRemote?.authorizeAndPlayURI(trackURI)
@@ -54,6 +55,7 @@ class APIManager{
     
     func play(){
         //continue playing current song
+        print("play function called")
         appRemote?.playerAPI?.play(trackURI, callback: defaultCallback)
     }
     
@@ -144,7 +146,6 @@ class APIManager{
             
             lock.signal()
         }.resume()
-        
         lock.wait()
         return
     }
@@ -179,17 +180,17 @@ extension APIManager: KolodaViewDelegate{
     
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
 //        print(songs[index])
-        print(songs.count)
-        print(index)
+//        print(songs.co
+        
         //TODO: asynchronously add a song to the back of the array everytip a card is swiped -> call getSingleRec()
         //TODO: add to likes/dislikes on swipe
         
         switch (direction){
         case .right:
-            print("right")
+//            print("right")
             AddResponse(song: songs[index], liked: true)
         case .left:
-            print("left")
+//            print("left")
             AddResponse(song: songs[index], liked: false)
         case .up:
             print("up")
@@ -202,6 +203,12 @@ extension APIManager: KolodaViewDelegate{
         0.65
     }
     
+    func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
+        trackURI = songs[index].uri
+        if isPlaying {
+            appRemote?.playerAPI?.play(trackURI)
+        }
+    }
     
 }
 

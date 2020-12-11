@@ -19,11 +19,12 @@ class HomeViewController: UIViewController {
 //    }
     
     let apiManager = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.apiManager
-//    let appRemote = apiManager.appRemote
-//    var appRemote: SPTAppRemote?
+    
+    let playPauseImageConfig = UIImage.SymbolConfiguration(pointSize: 32.0)
     
 
     @IBOutlet weak var songCardView: KolodaView!
+    @IBOutlet weak var playPauseButton: UIButton!
     
     
     var songList: [Song] = []
@@ -48,6 +49,19 @@ class HomeViewController: UIViewController {
     @IBAction func lyricsButton(_ sender: Any) {
 //        let lyricsVC = LyricsViewController()
 //        navigationController?.pushViewController(lyricsVC, animated: true)
+    }
+    
+    @IBAction func playPauseButtonPressed(_ sender: Any) {
+        //play/pause the current song
+        if apiManager?.isPlaying ?? false {
+            apiManager?.pause()
+            apiManager?.isPlaying = false
+            playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: playPauseImageConfig), for: .normal)
+        } else{
+            apiManager?.play()
+            apiManager?.isPlaying = true
+            playPauseButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: playPauseImageConfig), for: .normal)
+        }
     }
     
     override func viewDidLoad() {
@@ -81,6 +95,11 @@ class HomeViewController: UIViewController {
         
         DispatchQueue.main.async {
             self.apiManager!.connect()
+        }
+        if apiManager?.isPlaying ?? false {
+            playPauseButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: playPauseImageConfig), for: .normal)
+        } else {
+            playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: playPauseImageConfig), for: .normal)
         }
 
     }

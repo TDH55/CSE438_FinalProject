@@ -17,7 +17,7 @@ class SongTableViewCell: UITableViewCell {
     @IBOutlet weak var dislikeButton: UIButton!
     
     //TODO: add button functionality and update the button display
-    
+    //TODO: add play/pause button?
 }
 
 class SongListVC: UIViewController {
@@ -63,19 +63,24 @@ extension SongListVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let thumbImageConfig = UIImage.SymbolConfiguration(pointSize: 24.0)
 //        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SongTableViewCell
         cell.songTitleLabel!.text = songList[indexPath.row].value(forKey: "name") as? String
         cell.songArtistLabel!.text = songList[indexPath.row].value(forKey: "artistName") as? String
         
+        cell.likeButton.setImage(UIImage(systemName: "hand.thumbsup", withConfiguration: thumbImageConfig), for: .normal)
+        cell.dislikeButton.setImage(UIImage(systemName: "hand.thumbsdown", withConfiguration: thumbImageConfig), for: .normal)
+        
         if let isLiked = songList[indexPath.row].value(forKey: "liked") as? Bool {
             if isLiked {
                 print("liked")
-                cell.likeButton.setImage(UIImage(systemName: "hand.thumbsup.fill"), for: .normal)
+                cell.likeButton.setImage(UIImage(systemName: "hand.thumbsup.fill", withConfiguration: thumbImageConfig), for: .normal)
             }else{
                 print("disliked")
 //                cell.dislikeButton.imageView?.image = UIImage(named: "hand.thumbsdown.fill")
-                cell.dislikeButton.setImage(UIImage(systemName: "hand.thumbsdown.fill"), for: .normal)
+                cell.dislikeButton.setImage(UIImage(systemName: "hand.thumbsdown.fill", withConfiguration: thumbImageConfig), for: .normal)
             }
         }
     

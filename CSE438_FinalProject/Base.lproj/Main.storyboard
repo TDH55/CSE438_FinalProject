@@ -74,12 +74,20 @@
                                     <constraint firstAttribute="height" constant="80" id="PHN-UL-dVE"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mhp-ID-CcL">
+                                <rect key="frame" x="199.5" y="792" width="15" height="22"/>
+                                <state key="normal" image="play.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="playPauseButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xKn-d9-c9y"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="u7q-9Y-ro4" firstAttribute="top" secondItem="ChG-hw-v1v" secondAttribute="bottom" constant="8" id="2Iq-7A-hPW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UkT-S5-bx0" secondAttribute="trailing" constant="32" id="2gL-di-gJp"/>
+                            <constraint firstItem="mhp-ID-CcL" firstAttribute="top" secondItem="u7q-9Y-ro4" secondAttribute="bottom" constant="32" id="AN3-Rg-pOj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="u7q-9Y-ro4" secondAttribute="trailing" constant="16" id="BZH-mc-qyz"/>
                             <constraint firstItem="UkT-S5-bx0" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0dk-0K-vcJ" secondAttribute="trailing" constant="100" id="IQn-Ml-eKP"/>
                             <constraint firstItem="ChG-hw-v1v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="SlY-wh-a0n"/>
@@ -89,11 +97,13 @@
                             <constraint firstItem="UkT-S5-bx0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="haR-nm-CEV"/>
                             <constraint firstItem="u7q-9Y-ro4" firstAttribute="top" secondItem="ChG-hw-v1v" secondAttribute="bottom" constant="8" id="rcF-yu-5eI"/>
                             <constraint firstItem="u7q-9Y-ro4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="sII-Co-O7i"/>
+                            <constraint firstItem="mhp-ID-CcL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xDg-Ol-d6q"/>
                             <constraint firstItem="0dk-0K-vcJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="yc9-b3-tUh"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="NRt-kT-xn7"/>
                     <connections>
+                        <outlet property="playPauseButton" destination="mhp-ID-CcL" id="Wdx-jf-u3N"/>
                         <outlet property="songCardView" destination="ChG-hw-v1v" id="OFQ-pR-Kva"/>
                     </connections>
                 </viewController>
@@ -261,6 +271,7 @@
     <resources>
         <image name="hand.thumbsdown" catalog="system" width="128" height="128"/>
         <image name="hand.thumbsup" catalog="system" width="128" height="128"/>
+        <image name="play.fill" catalog="system" width="116" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
