@@ -83,8 +83,10 @@ class HomeViewController: UIViewController {
         //if auth fails, retry
         DispatchQueue.main.async {
             self.apiManager!.connect()
-            self.apiManager?.getLikedSongs()
+//            self.apiManager?.getLikedSongs()
         }
+        
+        
         if apiManager?.isPlaying ?? false {
             playPauseButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: playPauseImageConfig), for: .normal)
         } else {

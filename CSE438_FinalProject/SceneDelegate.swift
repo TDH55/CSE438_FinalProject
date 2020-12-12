@@ -19,6 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
     lazy var configuration = SPTConfiguration(clientID: clientId, redirectURL: spotifyRedirectURL)
 
     var homeViewController: HomeViewController?
+    var establishedConnectionHasRun: Bool = false
+
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -39,6 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         if let _ = self.appRemote.connectionParameters.accessToken {
             self.appRemote.connect()
+//            self.appRemote.authorizeAndPlayURI("")
             apiManager.pause()
 //            apiManager.getCards()
         }
@@ -91,21 +94,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
     }
     
     func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
-        print("connected")
-        self.apiManager.songs = []
-        self.appRemote.playerAPI?.delegate = self
-        self.appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in
-            if let error = error {
-                debugPrint(error.localizedDescription)
-            }
-        })
-        self.apiManager.userToken = self.accessToken
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.apiManager.getRecs(3)
-            DispatchQueue.main.async {
-                self.homeViewController?.songCardView.reloadData()
+//        self.appRemote.authorizeAndPlayURI("")
+        if(!establishedConnectionHasRun){
+            self.apiManager.songs = []
+            self.appRemote.playerAPI?.delegate = self
+            self.appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in
+                if let error = error {
+                    debugPrint(error.localizedDescription)
+                }
+            })
+            self.apiManager.userToken = self.accessToken
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.apiManager.getRecs(3)
+                DispatchQueue.main.async {
+                    self.homeViewController?.songCardView.reloadData()
+                }
             }
         }
+        establishedConnectionHasRun = true
+        print("connected")
+        
 //        self.apiManager.getRecs()
 //        homeViewController?.songCardView.reloadData()
     }

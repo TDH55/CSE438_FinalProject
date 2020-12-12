@@ -13,6 +13,7 @@ import CoreData
 
 
 //TODO: add to a playlist
+//TODO: initial recs
 
 class APIManager{
         
@@ -73,6 +74,18 @@ class APIManager{
         var seedTracks: String = ""
         
         if(likedSongs.count == 0){
+            let lock = DispatchSemaphore(value: 0)
+            DispatchQueue.main.sync {
+                let alertController = UIAlertController(title: "Select 3 genres", message: "select", preferredStyle: .alert)
+                
+                let doneAction = UIAlertAction(title: "Done", style: .default){ _ in
+                    alertController.dismiss(animated: true, completion: nil)
+                    lock.signal()
+                }
+                alertController.addAction(doneAction)
+                alertController.show()
+            }
+            lock.wait()
             print("0 likes seeds")
             seedArtists = "4NHQUGzhtTLFvgF5SZesLK"
             seedTracks = "0c6xIDDpzE81m2q797ordA&m"

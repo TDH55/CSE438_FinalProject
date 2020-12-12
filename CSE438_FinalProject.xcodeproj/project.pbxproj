@@ -11,6 +11,9 @@
 		5621B05625808DDD00F0B669 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621B05525808DDD00F0B669 /* APIManager.swift */; };
 		56336914257AFCEB004B2D9A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56336913257AFCEB004B2D9A /* LoginViewController.swift */; };
 		5648E5CC2574AD81004DC7AB /* SongListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648E5CB2574AD81004DC7AB /* SongListVC.swift */; };
+		567EC8522584BA4600EA9384 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567EC8512584BA4600EA9384 /* UIAlertControllerExtension.swift */; };
+		567EC8632584C21500EA9384 /* AlertGenreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567EC8622584C21500EA9384 /* AlertGenreView.xib */; };
+		567EC8662584C24500EA9384 /* AlertGenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567EC8652584C24500EA9384 /* AlertGenreView.swift */; };
 		56A5D406257AF5B80019DE8D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A5D405257AF5B80019DE8D /* SpotifyiOS.framework */; };
 		56C337502567887D00F4F95F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3374F2567887D00F4F95F /* HomeViewController.swift */; };
 		56C33756256789DC00F4F95F /* KolodaViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33755256789DC00F4F95F /* KolodaViewDataSource.swift */; };
@@ -36,6 +39,9 @@
 		5621B05525808DDD00F0B669 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		56336913257AFCEB004B2D9A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5648E5CB2574AD81004DC7AB /* SongListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListVC.swift; sourceTree = "<group>"; };
+		567EC8512584BA4600EA9384 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
+		567EC8622584C21500EA9384 /* AlertGenreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertGenreView.xib; sourceTree = "<group>"; };
+		567EC8652584C24500EA9384 /* AlertGenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertGenreView.swift; sourceTree = "<group>"; };
 		56A5D405257AF5B80019DE8D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		56A5D409257AF74E0019DE8D /* CSE438_FinalProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CSE438_FinalProject-Bridging-Header.h"; sourceTree = "<group>"; };
 		56C3374F2567887D00F4F95F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +103,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		567EC8502584BA3800EA9384 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				567EC8512584BA4600EA9384 /* UIAlertControllerExtension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		56C3374E2567885D00F4F95F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +156,8 @@
 			isa = PBXGroup;
 			children = (
 				56C337632567953700F4F95F /* CardView.swift */,
+				567EC8622584C21500EA9384 /* AlertGenreView.xib */,
+				567EC8652584C24500EA9384 /* AlertGenreView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -169,6 +185,7 @@
 		56E43230256327660088D117 /* CSE438_FinalProject */ = {
 			isa = PBXGroup;
 			children = (
+				567EC8502584BA3800EA9384 /* Helpers */,
 				5621B05425808DD400F0B669 /* Managers */,
 				56E43231256327660088D117 /* AppDelegate.swift */,
 				56E43233256327660088D117 /* SceneDelegate.swift */,
@@ -247,6 +264,7 @@
 				56E4323E256327680088D117 /* LaunchScreen.storyboard in Resources */,
 				56E4323B256327680088D117 /* Assets.xcassets in Resources */,
 				56E43239256327660088D117 /* Main.storyboard in Resources */,
+				567EC8632584C21500EA9384 /* AlertGenreView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,9 +326,11 @@
 				56C337612567926600F4F95F /* APIResponse.swift in Sources */,
 				56C3375F2567903200F4F95F /* Artist.swift in Sources */,
 				56E43234256327660088D117 /* SceneDelegate.swift in Sources */,
+				567EC8662584C24500EA9384 /* AlertGenreView.swift in Sources */,
 				5648E5CC2574AD81004DC7AB /* SongListVC.swift in Sources */,
 				56C3375825678A2800F4F95F /* KolodaViewDelegate.swift in Sources */,
 				56C33756256789DC00F4F95F /* KolodaViewDataSource.swift in Sources */,
+				567EC8522584BA4600EA9384 /* UIAlertControllerExtension.swift in Sources */,
 				56C337502567887D00F4F95F /* HomeViewController.swift in Sources */,
 				56C337642567953700F4F95F /* CardView.swift in Sources */,
 				56C3375D2567902E00F4F95F /* Album.swift in Sources */,
