@@ -84,7 +84,7 @@ class HomeViewController: UIViewController {
         //if auth fails, retry
         DispatchQueue.main.async {
             self.apiManager!.connect()
-//            self.apiManager?.getLikedSongs()
+            self.apiManager?.getLikedSongs()
         }
         
         

@@ -24,6 +24,7 @@ class APIManager{
         }
     }
     
+    
     //spotify setup stuff
     var defaultCallback: SPTAppRemoteCallback {
         get {
@@ -37,6 +38,8 @@ class APIManager{
         }
     }
     
+    var userID: String = ""
+
     //core data setup
     var rootViewController: UIViewController?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -243,6 +246,30 @@ class APIManager{
         return genres
     }
     
+    func getUserID() -> String {
+        var returnValue: String = ""
+        let lock = DispatchSemaphore(value: 0)
+        let requestURL = URL(string: "https://api.spotify.com/v1/me")!
+        var profileRequest = URLRequest(url: requestURL)
+        
+        profileRequest.httpMethod = "GET"
+        profileRequest.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: profileRequest) {(data, response, error) in
+            guard error == nil else {
+                print("error: \(String(describing: error))")
+                return
+            }
+            
+            if let json = try? JSON(data: data!){
+                returnValue = json["id"].string!
+                lock.signal()
+            }
+        }.resume()
+        
+        lock.wait()
+        return returnValue
+    }
 }
 
 //MARK: KolodaViewDataSource
