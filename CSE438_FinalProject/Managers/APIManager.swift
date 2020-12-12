@@ -11,7 +11,6 @@ import SwiftyJSON
 import Koloda
 import CoreData
 
-//TODO: set as kolada view data source?
 class APIManager{
         
     //sets tha ppRemote to what was defined in scene delegate
@@ -42,6 +41,7 @@ class APIManager{
     var trackURI: String = ""
     var songs: [Song] = []
     var likedSongs: [NSManagedObject] = []
+    var responseIDs: [String] = []
 
     
     var isPlaying: Bool = true
@@ -102,7 +102,6 @@ class APIManager{
                 }
             }
             
-            //TODO: update seeds based on the rng
             for seedNumber in seedNumbers {
                 let songNumber = seedNumber/2
                 if (seedNumber % 2 == 0) {
@@ -157,9 +156,13 @@ class APIManager{
                 apiResponse = try JSONDecoder().decode(APIResponse.self, from: data!)
                 for track in apiResponse!.tracks {
                     //create song onbject and add to array
-                    let song = Song(id: track.id, name: track.name, artistName: track.artists[0].name, artistID: track.artists[0].id, artworkURL: track.album.images[1].url, artworkHeight: track.album.images[1].height, artworkWidth: track.album.images[1].width, duration: track.duration_ms, uri: track.uri)
-                    self.songs.append(song)
-//                    print(song)
+                    if(self.responseIDs.contains(track.id)){
+                        //if the song has been reponded to, recursively call get recs until you get a song that hasnt been responded to
+                        self.getRecs(1)
+                    }else {
+                        let song = Song(id: track.id, name: track.name, artistName: track.artists[0].name, artistID: track.artists[0].id, artworkURL: track.album.images[1].url, artworkHeight: track.album.images[1].height, artworkWidth: track.album.images[1].width, duration: track.duration_ms, uri: track.uri)
+                        self.songs.append(song)
+                    }
                 }
             }catch let error {
                 print("error decoding api response: \(error)")
@@ -173,51 +176,9 @@ class APIManager{
         return
     }
     
-    //use this to get a single rec on swipe
-//    func getSingleRec(){
-//        //TODO: implement method to get single rec and add it to array
-//        //if less than 5 in core data, seeds equal those 5 (randomly by song or artist)
-//        //if more than 5, pick 5 songs weighting more recent higher, select song or artist as seed randomly
-//
-//        let lock = DispatchSemaphore(value: 0)
-//
-//        let parameters: String = "" //fill this with the seeds
-//        let recommendationURL = URL(string: "https://api.spotify.com/v1/recommendations?\(parameters)")!
-//        var recommendationRequest = URLRequest(url: recommendationURL)
-//
-//        recommendationRequest.httpMethod = "GET"
-//        recommendationRequest.addValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
-//
-//        //variable for api response
-//        var apiResponse: APIResponse?
-//
-//        //execute request
-//        URLSession.shared.dataTask(with: recommendationRequest) { (data, response, error) in
-//            guard error == nil else {
-//                print("error with reques: \(String(describing: error))")
-//                return
-//            }
-//
-//            //try catch for processing response
-//            do {
-//                guard data != nil else { return }
-//                apiResponse = try JSONDecoder().decode(APIResponse.self, from: data!)
-//                for track in apiResponse!.tracks {
-//                    //create song onbject and add to array
-//                    let song = Song(id: track.id, name: track.name, artistName: track.artists[0].name, artistID: track.artists[0].id, artworkURL: track.album.images[1].url, artworkHeight: track.album.images[1].height, artworkWidth: track.album.images[1].width, duration: track.duration_ms, uri: track.uri)
-//                    self.songs.append(song)
-//                }
-//            } catch let error {
-//                print("error decoding api response \(error)")
-//            }
-//
-//            lock.signal()
-//        }.resume()
-//        lock.wait()
-//        return
-//    }
 }
 
+//MARK: KolodaViewDataSource
 extension APIManager: KolodaViewDataSource{
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
             //TODO: create image cache? and give an image for the card here
@@ -238,6 +199,7 @@ extension APIManager: KolodaViewDataSource{
     }
 }
 
+//MARK: KolodaViewDelegate
 extension APIManager: KolodaViewDelegate{
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         //TODO: get new songs
@@ -290,7 +252,7 @@ extension APIManager: KolodaViewDelegate{
     
 }
 
-//core data functions
+//MARK: core data functions
 extension APIManager{
     func AddResponse(song: Song, liked: Bool){
         guard let entity = NSEntityDescription.entity(forEntityName: "SongResponse", in: context) else { return  }
@@ -329,6 +291,19 @@ extension APIManager{
         
         do{
             likedSongs = try context.fetch(fetchRequest)
+        } catch let error {
+            print("Error fetching from core data \(error)")
+        }
+    }
+    
+    func getResponseIDs(){
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SongResponse")
+        
+        do {
+            for song in try context.fetch(fetchRequest){
+                let songID = song.value(forKey: "id") as! String
+                responseIDs.append(songID)
+            }
         } catch let error {
             print("Error fetching from core data \(error)")
         }
