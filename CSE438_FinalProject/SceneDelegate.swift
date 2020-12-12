@@ -101,7 +101,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
         })
         self.apiManager.userToken = self.accessToken
         DispatchQueue.global(qos: .userInitiated).async {
-            self.apiManager.getRecs()
+            self.apiManager.getRecs(3)
             DispatchQueue.main.async {
                 self.homeViewController?.songCardView.reloadData()
             }
