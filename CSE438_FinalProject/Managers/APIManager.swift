@@ -11,6 +11,9 @@ import SwiftyJSON
 import Koloda
 import CoreData
 
+
+//TODO: add to a playlist
+
 class APIManager{
         
     //sets tha ppRemote to what was defined in scene delegate

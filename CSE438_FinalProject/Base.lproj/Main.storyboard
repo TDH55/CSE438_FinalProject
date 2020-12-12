@@ -198,10 +198,16 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="21" height="22.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                             <state key="normal" image="hand.thumbsup" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="likeButtonPressed:" destination="AeU-Ew-B5d" eventType="touchUpInside" id="IrV-wV-OiH"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofc-29-XmD">
                                                             <rect key="frame" x="37" y="0.0" width="21" height="22.5"/>
                                                             <state key="normal" image="hand.thumbsdown" catalog="system"/>
+                                                            <connections>
+                                                                <action selector="dislikeButtonPressed:" destination="AeU-Ew-B5d" eventType="touchUpInside" id="K3z-A8-ySC"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
