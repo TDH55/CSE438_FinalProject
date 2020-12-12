@@ -12,12 +12,6 @@ import StoreKit
 
 class HomeViewController: UIViewController {
     
-//    var appRemote: SPTAppRemote? {
-//        get {
-//            return (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.appRemote
-//        }
-//    }
-    
     let apiManager = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.apiManager
     
     let playPauseImageConfig = UIImage.SymbolConfiguration(pointSize: 32.0)
@@ -75,26 +69,21 @@ class HomeViewController: UIViewController {
         sceneDelegate.homeViewController = self
         
         guard apiManager != nil else { return }
-
+        
         
         
         // Do any additional setup after loading the view.
         
-        //TODO: Set up cards so these don't cause errors
         //set up card view
         songCardView.delegate = apiManager
         songCardView.dataSource = apiManager
         
-        //TODO: load songs
-        //request authorization for music api
-        //setup apiManager - janky way because I couln't get DispatchSephamores to work
         //IMPORTANT!!! this is not a real implementation, we need to check for permission and ask if needed, and then load songs
-        
         //TODO: check if authorized, and authorize user if they are not
         //if auth fails, retry
-        
         DispatchQueue.main.async {
             self.apiManager!.connect()
+            self.apiManager?.getLikedSongs()
         }
         if apiManager?.isPlaying ?? false {
             playPauseButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: playPauseImageConfig), for: .normal)

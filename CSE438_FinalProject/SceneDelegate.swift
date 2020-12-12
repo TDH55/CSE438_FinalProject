@@ -100,24 +100,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
             }
         })
         self.apiManager.userToken = self.accessToken
-        self.apiManager.getRecs()
-        homeViewController?.songCardView.reloadData()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.apiManager.getRecs()
+            DispatchQueue.main.async {
+                self.homeViewController?.songCardView.reloadData()
+            }
+        }
+//        self.apiManager.getRecs()
+//        homeViewController?.songCardView.reloadData()
     }
 
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
         print("disconnected error: \(error!.localizedDescription)")
-        print("disconnected")
     }
     
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
         print("failed error: \(error!)")
-        print("Access token \(accessToken)")
-        print("failed")
     }
     
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-        print("player state changed")
-        debugPrint("Track name: %@", playerState.track.name)
+//        print("player state changed")
+//        debugPrint("Track name: %@", playerState.track.name)
     }
     
 }

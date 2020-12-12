@@ -41,6 +41,8 @@ class APIManager{
     var userToken: String = ""
     var trackURI: String = ""
     var songs: [Song] = []
+    var likedSongs: [NSManagedObject] = []
+
     
     var isPlaying: Bool = true
 
@@ -55,7 +57,6 @@ class APIManager{
     
     func play(){
         //continue playing current song
-        print("play function called")
         appRemote?.playerAPI?.play(trackURI, callback: defaultCallback)
     }
     
@@ -174,14 +175,18 @@ extension APIManager: KolodaViewDataSource{
 extension APIManager: KolodaViewDelegate{
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         //TODO: get new songs
-        getRecs()
-        koloda.reloadData()
+        //TODO: this will probably be replaced
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.getRecs()
+            DispatchQueue.main.async {
+                koloda.reloadData()
+            }
+        }
+//        getRecs()
+//        koloda.reloadData()
     }
     
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
-//        print(songs[index])
-//        print(songs.co
-        
         //TODO: asynchronously add a song to the back of the array everytip a card is swiped -> call getSingleRec()
         //TODO: add to likes/dislikes on swipe
         
@@ -197,6 +202,7 @@ extension APIManager: KolodaViewDelegate{
         default:
             print("default")
         }
+        
     }
     
     func kolodaSwipeThresholdRatioMargin(_ koloda: KolodaView) -> CGFloat? {
@@ -230,6 +236,11 @@ extension APIManager{
         songResponse.setValue(song.name, forKey: "name")
         songResponse.setValue(song.uri, forKey: "uri")
         
+        if songResponse.value(forKey: "liked") as! Bool == true {
+            likedSongs.append(songResponse)
+            print("added to liked songs \(likedSongs.count)")
+        }
+        
         //try catch for persisting save
         do{
             try context.save()
@@ -237,5 +248,17 @@ extension APIManager{
             print("Failed saving to core data: \(error)")
         }
         return
+    }
+    
+    
+    func getLikedSongs(){
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SongResponse")
+        fetchRequest.predicate = NSPredicate(format: "liked == \(true)")
+        
+        do{
+            likedSongs = try context.fetch(fetchRequest)
+        } catch let error {
+            print("Error fetching from core data \(error)")
+        }
     }
 }

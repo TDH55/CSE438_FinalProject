@@ -75,10 +75,8 @@ extension SongListVC: UITableViewDataSource{
         
         if let isLiked = songList[indexPath.row].value(forKey: "liked") as? Bool {
             if isLiked {
-                print("liked")
                 cell.likeButton.setImage(UIImage(systemName: "hand.thumbsup.fill", withConfiguration: thumbImageConfig), for: .normal)
             }else{
-                print("disliked")
 //                cell.dislikeButton.imageView?.image = UIImage(named: "hand.thumbsdown.fill")
                 cell.dislikeButton.setImage(UIImage(systemName: "hand.thumbsdown.fill", withConfiguration: thumbImageConfig), for: .normal)
             }
