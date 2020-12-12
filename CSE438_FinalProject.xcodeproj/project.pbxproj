@@ -14,6 +14,7 @@
 		567EC8522584BA4600EA9384 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567EC8512584BA4600EA9384 /* UIAlertControllerExtension.swift */; };
 		567EC8632584C21500EA9384 /* AlertGenreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567EC8622584C21500EA9384 /* AlertGenreView.xib */; };
 		567EC8662584C24500EA9384 /* AlertGenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567EC8652584C24500EA9384 /* AlertGenreView.swift */; };
+		567EC8772584D4FB00EA9384 /* GenrePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567EC8762584D4FB00EA9384 /* GenrePickerVC.swift */; };
 		56A5D406257AF5B80019DE8D /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A5D405257AF5B80019DE8D /* SpotifyiOS.framework */; };
 		56C337502567887D00F4F95F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3374F2567887D00F4F95F /* HomeViewController.swift */; };
 		56C33756256789DC00F4F95F /* KolodaViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33755256789DC00F4F95F /* KolodaViewDataSource.swift */; };
@@ -42,6 +43,7 @@
 		567EC8512584BA4600EA9384 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		567EC8622584C21500EA9384 /* AlertGenreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertGenreView.xib; sourceTree = "<group>"; };
 		567EC8652584C24500EA9384 /* AlertGenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertGenreView.swift; sourceTree = "<group>"; };
+		567EC8762584D4FB00EA9384 /* GenrePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenrePickerVC.swift; sourceTree = "<group>"; };
 		56A5D405257AF5B80019DE8D /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		56A5D409257AF74E0019DE8D /* CSE438_FinalProject-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CSE438_FinalProject-Bridging-Header.h"; sourceTree = "<group>"; };
 		56C3374F2567887D00F4F95F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 				56C337512567895300F4F95F /* HomeViewController */,
 				56E43235256327660088D117 /* ViewController.swift */,
 				56336913257AFCEB004B2D9A /* LoginViewController.swift */,
+				567EC8762584D4FB00EA9384 /* GenrePickerVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				56C337642567953700F4F95F /* CardView.swift in Sources */,
 				56C3375D2567902E00F4F95F /* Album.swift in Sources */,
 				CFAEE1252574A676008320BA /* LyricsViewController.swift in Sources */,
+				567EC8772584D4FB00EA9384 /* GenrePickerVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

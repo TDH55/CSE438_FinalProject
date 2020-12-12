@@ -9,6 +9,95 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Genre PickerVC-->
+        <scene sceneID="6Au-3V-WAr">
+            <objects>
+                <viewController id="GNB-gb-kBX" customClass="GenrePickerVC" customModule="CSE438_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9cP-VE-36e">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ClL-uS-g2C">
+                                <rect key="frame" x="168.5" y="767" width="77" height="51"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneButton:" destination="GNB-gb-kBX" eventType="touchUpInside" id="osq-4d-7vV"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="42e-u3-F0u">
+                                <rect key="frame" x="16" y="60" width="382" height="691"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="GenreCell" id="ZQy-9R-Vhy" customClass="GenreCell" customModule="CSE438_FinalProject" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="382" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZQy-9R-Vhy" id="kb9-V0-3Eo">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cD-Ym-dom">
+                                                    <rect key="frame" x="346" y="11" width="20" height="22"/>
+                                                    <state key="normal" image="circle" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="SelectButtonClicked:" destination="ZQy-9R-Vhy" eventType="touchUpInside" id="otK-RY-0QT"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5SM-7p-DbA">
+                                                    <rect key="frame" x="20" y="11.5" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8cD-Ym-dom" firstAttribute="centerY" secondItem="kb9-V0-3Eo" secondAttribute="centerY" id="9r3-4e-DKl"/>
+                                                <constraint firstItem="5SM-7p-DbA" firstAttribute="centerY" secondItem="kb9-V0-3Eo" secondAttribute="centerY" id="Ef9-fh-Ay5"/>
+                                                <constraint firstAttribute="trailing" secondItem="8cD-Ym-dom" secondAttribute="trailing" constant="16" id="pv8-ZI-hZa"/>
+                                                <constraint firstItem="8cD-Ym-dom" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5SM-7p-DbA" secondAttribute="trailing" constant="8" symbolic="YES" id="uQD-6U-r3x"/>
+                                                <constraint firstItem="5SM-7p-DbA" firstAttribute="leading" secondItem="kb9-V0-3Eo" secondAttribute="leadingMargin" id="zjA-lc-042"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="genreLabel" destination="5SM-7p-DbA" id="4Ve-6I-BRY"/>
+                                            <outlet property="selectGenreButton" destination="8cD-Ym-dom" id="pWq-xQ-Cff"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sm5-H7-uGZ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7II-NS-SX1"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Genres" id="FH7-CX-b8N"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cVb-sL-fbT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cVb-sL-fbT" firstAttribute="trailing" secondItem="42e-u3-F0u" secondAttribute="trailing" constant="16" id="2LT-qi-afD"/>
+                            <constraint firstItem="42e-u3-F0u" firstAttribute="top" secondItem="Sm5-H7-uGZ" secondAttribute="bottom" constant="16" id="3Cm-mK-rkP"/>
+                            <constraint firstAttribute="bottom" secondItem="ClL-uS-g2C" secondAttribute="bottom" constant="24" id="4T5-Sm-V8G"/>
+                            <constraint firstItem="42e-u3-F0u" firstAttribute="leading" secondItem="cVb-sL-fbT" secondAttribute="leading" constant="16" id="RYW-UF-3Jn"/>
+                            <constraint firstItem="ClL-uS-g2C" firstAttribute="centerX" secondItem="9cP-VE-36e" secondAttribute="centerX" id="Whu-xd-rHW"/>
+                            <constraint firstItem="Sm5-H7-uGZ" firstAttribute="leading" secondItem="9cP-VE-36e" secondAttribute="leading" id="b2T-fr-2oy"/>
+                            <constraint firstItem="ClL-uS-g2C" firstAttribute="top" secondItem="42e-u3-F0u" secondAttribute="bottom" constant="16" id="sYv-yG-Tz8"/>
+                            <constraint firstItem="Sm5-H7-uGZ" firstAttribute="top" secondItem="cVb-sL-fbT" secondAttribute="top" id="u3w-b3-6N3"/>
+                            <constraint firstItem="Sm5-H7-uGZ" firstAttribute="centerX" secondItem="42e-u3-F0u" secondAttribute="centerX" id="vSc-HA-WSe"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="doneButton" destination="ClL-uS-g2C" id="6Bk-lS-Ysq"/>
+                        <outlet property="genreTableView" destination="42e-u3-F0u" id="9FS-m1-9eq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9pP-7F-NSF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1950.7246376811595" y="-590.625"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -105,6 +194,7 @@
                     <connections>
                         <outlet property="playPauseButton" destination="mhp-ID-CcL" id="Wdx-jf-u3N"/>
                         <outlet property="songCardView" destination="ChG-hw-v1v" id="OFQ-pR-Kva"/>
+                        <segue destination="GNB-gb-kBX" kind="presentation" identifier="GenrePicker" id="bqF-br-iXt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -275,6 +365,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="hand.thumbsdown" catalog="system" width="128" height="128"/>
         <image name="hand.thumbsup" catalog="system" width="128" height="128"/>
         <image name="play.fill" catalog="system" width="116" height="128"/>

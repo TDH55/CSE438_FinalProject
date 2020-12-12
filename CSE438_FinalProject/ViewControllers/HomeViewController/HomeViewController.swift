@@ -67,6 +67,7 @@ class HomeViewController: UIViewController {
         }
         
         sceneDelegate.homeViewController = self
+        apiManager?.rootViewController = self
         
         guard apiManager != nil else { return }
         

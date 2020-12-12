@@ -16,6 +16,10 @@ struct APIResponse: Decodable {
     let seeds: [Seed]
 }
 
+struct GenreResponse: Decodable{
+    let genres: [String]
+}
+
 struct Track: Decodable {
     let id: String
     let album: Album

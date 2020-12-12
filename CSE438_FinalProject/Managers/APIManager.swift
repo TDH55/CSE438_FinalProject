@@ -38,6 +38,7 @@ class APIManager{
     }
     
     //core data setup
+    var rootViewController: UIViewController?
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //set default/initial values
@@ -46,10 +47,12 @@ class APIManager{
     var songs: [Song] = []
     var likedSongs: [NSManagedObject] = []
     var responseIDs: [String] = []
-
+    
+    var userGenres: [String] = []
     
     var isPlaying: Bool = true
 
+    let recommendationLock = DispatchSemaphore(value: 0)
     func connect() {
         appRemote?.authorizeAndPlayURI(trackURI)
     }
@@ -72,23 +75,25 @@ class APIManager{
         //keeps function from returning before the request is complete
         var seedArtists: String = ""
         var seedTracks: String = ""
+        var seedGenres: String = ""
         
         if(likedSongs.count == 0){
-            let lock = DispatchSemaphore(value: 0)
             DispatchQueue.main.sync {
-                let alertController = UIAlertController(title: "Select 3 genres", message: "select", preferredStyle: .alert)
                 
-                let doneAction = UIAlertAction(title: "Done", style: .default){ _ in
-                    alertController.dismiss(animated: true, completion: nil)
-                    lock.signal()
-                }
-                alertController.addAction(doneAction)
-                alertController.show()
+                let genrePicker = GenrePickerVC()
+                rootViewController?.performSegue(withIdentifier: "GenrePicker", sender: nil)
+                genrePicker.isModalInPresentation = true
+                
             }
-            lock.wait()
+            recommendationLock.wait()
             print("0 likes seeds")
-            seedArtists = "4NHQUGzhtTLFvgF5SZesLK"
-            seedTracks = "0c6xIDDpzE81m2q797ordA&m"
+            for genre in userGenres {
+                if(seedGenres.isEmpty){
+                    seedGenres.append(genre)
+                }else{
+                    seedGenres.append(",\(genre)")
+                }
+            }
         } else if(likedSongs.count < 3) {
             print(" < 3 likes seeds")
             for song in likedSongs {
@@ -148,7 +153,21 @@ class APIManager{
         
         let lock = DispatchSemaphore(value: 0)
         //set the url for the request
-        let parameters: String = "limit=\(numberOfRecs)&market=US&seed_artists=\(seedArtists)&seed_tracks=\(seedTracks)" //TODO: fill parameters
+        var seedArtistParameter: String = ""
+        var seedTracksParameter: String = ""
+        var seedGenreParameter: String = ""
+        
+        if(!seedArtists.isEmpty){
+            seedArtistParameter = "&seed_artists=\(seedArtists)"
+        }
+        if(!seedTracks.isEmpty){
+            seedTracksParameter = "&seed_tracks=\(seedTracks)"
+        }
+        if(!seedGenres.isEmpty){
+            seedGenreParameter = "&seed_genres=\(seedGenres)"
+        }
+        
+        let parameters: String = "limit=\(numberOfRecs)&market=US\(seedArtistParameter)\(seedTracksParameter)\(seedGenreParameter)" //TODO: fill parameters
         let recommendationURL = URL(string: "https://api.spotify.com/v1/recommendations?\(parameters)")!
         var recommendationRequest = URLRequest(url: recommendationURL)
         
@@ -190,6 +209,38 @@ class APIManager{
         //wait for the signal before returning
         lock.wait()
         return
+    }
+    
+    func getGenres() -> [String] {
+        let lock = DispatchSemaphore(value: 0)
+        let requestURL = URL(string: "https://api.spotify.com/v1/recommendations/available-genre-seeds")!
+        var genreRequest = URLRequest(url: requestURL)
+        
+        genreRequest.httpMethod = "GET"
+        genreRequest.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
+        
+        var apiResponse: GenreResponse?
+        var genres: [String] = []
+        URLSession.shared.dataTask(with: genreRequest) { (data, response, error) in
+            guard error == nil else {
+                print("error: \(String(describing: error))")
+                return
+            }
+            
+            do {
+                guard let data = data else { return }
+                apiResponse = try JSONDecoder().decode(GenreResponse.self, from: data)
+                if let response = apiResponse?.genres{
+                    genres = response
+                }
+            }catch let error {
+                print("error: \(error)")
+            }
+            lock.signal()
+        }.resume()
+        
+        lock.wait()
+        return genres
     }
     
 }
