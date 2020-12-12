@@ -20,6 +20,15 @@ struct GenreResponse: Decodable{
     let genres: [String]
 }
 
+struct PlaylistResponse: Decodable{
+    let items: [Playlist]
+}
+
+struct Playlist: Decodable {
+    let id: String
+    let name: String
+}
+
 struct Track: Decodable {
     let id: String
     let album: Album

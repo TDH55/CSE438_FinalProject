@@ -39,6 +39,7 @@ class APIManager{
     }
     
     var userID: String = ""
+    var playlistID: String = ""
 
     //core data setup
     var rootViewController: UIViewController?
@@ -271,6 +272,88 @@ class APIManager{
         return returnValue
     }
 }
+
+////MARK: Playlist functions
+//extension APIManager{
+//    func initializePlaylist(){
+//        print("initialize playlist")
+//        //check if playlist exists, set playlist id if it does
+//        var playlists: [Playlist]
+//        let lock = DispatchSemaphore(value: 0)
+//        let getPlaylistsRequestURL = URL(string: "https://api.spotify.com/v1/me/playlists")!
+//        var getPlaylistsRequest = URLRequest(url: getPlaylistsRequestURL)
+//
+//        getPlaylistsRequest.httpMethod = "GET"
+//        getPlaylistsRequest.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
+//
+//        var playlistRequestResponse: PlaylistResponse?
+//        URLSession.shared.dataTask(with: getPlaylistsRequest) {(data, response, error) in
+//            guard error == nil else {
+//                print("error finding playlist: \(String(describing: error))")
+//                return
+//            }
+//            do {
+//                guard let data = data else { return }
+//                playlistRequestResponse = try JSONDecoder().decode(PlaylistResponse.self, from: data)
+//                for item in playlistRequestResponse!.items {
+//                    if(item.name == "Music Match Playlist"){
+//                        self.playlistID = item.id
+//                        return
+//                    }
+//                }
+//                lock.signal()
+//            }catch let error {
+//                print("error \(error)")
+//            }
+//        }.resume()
+//        lock.wait()
+//        //if it does not exist, create a playlist and set playlist id
+//
+//        let createPlaylistURL = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists")!
+//        var createPlaylistRequest = URLRequest(url: createPlaylistURL)
+//
+//        let body: [String: Any] = ["name": "Music Match Playlist", "description": "This playslist contains the songs you've liked in Music Match", "public": false]
+//        let bodyData = try? JSONSerialization.data(withJSONObject: body, options: [])
+//
+//        createPlaylistRequest.httpMethod = "POST"
+//        createPlaylistRequest.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
+//        createPlaylistRequest.httpBody = bodyData
+//
+//        print("create playlist")
+//        var createPlaylistResponse: Playlist?
+//        URLSession.shared.dataTask(with: createPlaylistRequest) {(data, response, error) in
+//            guard error == nil else {
+//                print("error creating: \(error)")
+//                return
+//            }
+//            print(response)
+//
+//            if let json = try? JSON(data: data!){
+//                print(json.rawString())
+//            }
+////            do{
+////                guard let data = data else { return }
+////                createPlaylistResponse = try JSONDecoder().decode(Playlist.self, from: data)
+////                print(createPlaylistResponse)
+////                self.playlistID = createPlaylistResponse!.id
+////                lock.signal()
+////            } catch let error {
+////                print("error decoding playlist: \(error)")
+////            }
+//        }.resume()
+//        lock.wait()
+//        return
+//
+//    }
+//
+//    func addSongToPlaylist(songID: String){
+//
+//    }
+//
+//    func removeSongFromPlaylist(songID: String){
+//
+//    }
+//}
 
 //MARK: KolodaViewDataSource
 extension APIManager: KolodaViewDataSource{

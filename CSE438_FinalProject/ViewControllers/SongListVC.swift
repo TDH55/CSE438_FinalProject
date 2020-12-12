@@ -14,7 +14,6 @@ class SongTableViewCell: UITableViewCell {
     let thumbImageConfig = UIImage.SymbolConfiguration(pointSize: 24.0)
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
-    @IBOutlet weak var albumCoverImage: UIImageView!
     @IBOutlet weak var songTitleLabel: UILabel!
     @IBOutlet weak var songArtistLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
@@ -22,6 +21,8 @@ class SongTableViewCell: UITableViewCell {
     var songID: String?
     var isLiked: Bool = false
     
+    //TODO: Make this an album cover
+    @IBOutlet weak var albumCoverButton: UIButton!
     
     //TODO: add button functionality and update the button display
     //TODO: add play/pause button? -> use the album art as play/pause?
@@ -49,6 +50,21 @@ class SongTableViewCell: UITableViewCell {
             updateLiked(songID: songID, false)
         }
     }
+    
+    
+    @IBAction func imageTapped(_ sender: Any) {
+//        NSURL *url = [NSURL URLWithString:@"https://open.spotify.com/album/0sNOF9WDwhWunNAHPD3Baj"];
+//
+//        [[UIApplication sharedApplication] openURL:url];
+        if let url = URL(string: "https://open.spotify.com/track/\(songID!)"){
+            print(url)
+            if UIApplication.shared.canOpenURL(url){
+                UIApplication.shared.open(url)
+            }
+        }
+        print("topped image")
+    }
+    
     
 }
 

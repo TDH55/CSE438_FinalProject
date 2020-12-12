@@ -258,14 +258,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Onl-KF-ZBe">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Onl-KF-ZBe" secondAttribute="height" id="AQ1-jM-5xg"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="yHy-xz-L5p">
-                                                    <rect key="frame" x="116" y="0.0" width="184" height="100"/>
+                                                    <rect key="frame" x="114" y="0.0" width="186" height="100"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ZH-BJ-s2U">
                                                             <rect key="frame" x="0.0" y="0.0" width="92" height="50"/>
@@ -301,21 +295,31 @@
                                                         </button>
                                                     </subviews>
                                                 </stackView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fvK-b3-bju">
+                                                    <rect key="frame" x="20" y="11" width="78" height="78"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="fvK-b3-bju" secondAttribute="height" multiplier="1:1" id="w8p-PD-g1P"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Button"/>
+                                                    <connections>
+                                                        <action selector="imageTapped:" destination="AeU-Ew-B5d" eventType="touchUpInside" id="ij6-ME-WUc"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Onl-KF-ZBe" firstAttribute="leading" secondItem="g3G-LT-E3A" secondAttribute="leading" id="2eH-nr-d1e"/>
+                                                <constraint firstItem="fvK-b3-bju" firstAttribute="top" secondItem="g3G-LT-E3A" secondAttribute="topMargin" id="7Nf-fN-5ec"/>
                                                 <constraint firstItem="4EE-7B-7tp" firstAttribute="centerY" secondItem="g3G-LT-E3A" secondAttribute="centerY" id="8fl-8Y-N9P"/>
-                                                <constraint firstItem="Onl-KF-ZBe" firstAttribute="top" secondItem="g3G-LT-E3A" secondAttribute="top" id="HQx-Ri-bTL"/>
                                                 <constraint firstAttribute="trailing" secondItem="4EE-7B-7tp" secondAttribute="trailing" constant="16" id="Mln-UR-cTP"/>
-                                                <constraint firstItem="yHy-xz-L5p" firstAttribute="leading" secondItem="Onl-KF-ZBe" secondAttribute="trailing" constant="16" id="RSr-hf-XYv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fvK-b3-bju" secondAttribute="bottom" id="Rrh-uq-7cj"/>
+                                                <constraint firstItem="yHy-xz-L5p" firstAttribute="leading" secondItem="fvK-b3-bju" secondAttribute="trailing" constant="16" id="kzI-2c-RXW"/>
+                                                <constraint firstItem="fvK-b3-bju" firstAttribute="leading" secondItem="g3G-LT-E3A" secondAttribute="leadingMargin" id="lnL-Bv-x1w"/>
                                                 <constraint firstAttribute="bottom" secondItem="yHy-xz-L5p" secondAttribute="bottom" id="oCe-Lv-0u6"/>
                                                 <constraint firstItem="4EE-7B-7tp" firstAttribute="leading" secondItem="yHy-xz-L5p" secondAttribute="trailing" constant="8" symbolic="YES" id="pfb-tQ-eSA"/>
-                                                <constraint firstAttribute="bottom" secondItem="Onl-KF-ZBe" secondAttribute="bottom" id="qo3-IM-evx"/>
                                                 <constraint firstItem="yHy-xz-L5p" firstAttribute="top" secondItem="g3G-LT-E3A" secondAttribute="top" id="tdU-Py-fje"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="albumCoverImage" destination="Onl-KF-ZBe" id="KbY-jo-0jh"/>
+                                            <outlet property="albumCoverButton" destination="fvK-b3-bju" id="voR-5y-ANI"/>
                                             <outlet property="dislikeButton" destination="ofc-29-XmD" id="dV9-5A-sJ0"/>
                                             <outlet property="likeButton" destination="mDk-Un-bOK" id="bFB-hN-fs2"/>
                                             <outlet property="songArtistLabel" destination="Wyk-Dz-Zec" id="pEh-2L-Rh1"/>

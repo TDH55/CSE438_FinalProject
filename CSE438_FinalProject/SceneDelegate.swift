@@ -104,7 +104,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
                 }
             })
             self.apiManager.userToken = self.accessToken
-            self.apiManager.userID = self.apiManager.getUserID()
+//            self.apiManager.userID = self.apiManager.getUserID()
+//            self.apiManager.initializePlaylist()
             DispatchQueue.global(qos: .userInitiated).async {
                 self.apiManager.getRecs(3)
                 DispatchQueue.main.async {
