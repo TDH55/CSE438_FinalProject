@@ -343,7 +343,13 @@
                             <constraint firstItem="UIq-6H-p97" firstAttribute="trailing" secondItem="br6-jJ-tw8" secondAttribute="trailing" constant="16" id="wty-1b-WrF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kKC-RH-7LR"/>
+                    <navigationItem key="navigationItem" id="kKC-RH-7LR">
+                        <barButtonItem key="rightBarButtonItem" title="Clear" id="P0P-jc-9Rp">
+                            <connections>
+                                <action selector="clearButtonPressed:" destination="1AA-JL-cLI" id="414-4i-XvJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="songTableView" destination="br6-jJ-tw8" id="vhb-sH-bkl"/>
                     </connections>

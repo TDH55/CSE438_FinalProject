@@ -85,7 +85,6 @@ class APIManager{
         
         if(likedSongs.count == 0){
             DispatchQueue.main.sync {
-                
                 let genrePicker = GenrePickerVC()
                 rootViewController?.performSegue(withIdentifier: "GenrePicker", sender: nil)
                 genrePicker.isModalInPresentation = true

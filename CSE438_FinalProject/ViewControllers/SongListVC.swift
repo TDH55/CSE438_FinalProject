@@ -21,6 +21,8 @@ class SongTableViewCell: UITableViewCell {
     var songID: String?
     var isLiked: Bool = false
     
+    
+    
     //TODO: Make this an album cover
     @IBOutlet weak var albumCoverButton: UIButton!
     
@@ -62,12 +64,13 @@ class SongTableViewCell: UITableViewCell {
                 UIApplication.shared.open(url)
             }
         }
-        print("topped image")
+        print("tapped image")
     }
     
     
 }
 
+//MARK: View controller
 class SongListVC: UIViewController {
     
     @IBOutlet weak var songTableView: UITableView!
@@ -75,6 +78,8 @@ class SongListVC: UIViewController {
     var songList: [NSManagedObject] = []
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +96,12 @@ class SongListVC: UIViewController {
         }
     }
     
-
+    
+    @IBAction func clearButtonPressed(_ sender: Any) {
+        removeAllSongs()
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -158,6 +168,35 @@ extension SongListVC {
         //TODO: handle images if we want them on this screen
     }
     
+    func removeAllSongs(){
+        guard let i = navigationController?.viewControllers.firstIndex(of: self) else { return }
+        guard let homeVC = navigationController?.viewControllers[i - 1] as? HomeViewController else { return }
+    
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "SongResponse")
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try context.execute(batchDeleteRequest)
+        } catch let error {
+            print("error deleting: \(error)")
+        }
+        
+        songList = []
+        songTableView.reloadData()
+//
+        homeVC.apiManager?.songs = []
+        homeVC.apiManager?.likedSongs = []
+//        homeVC.songCardView.reloadData()
+        homeVC.songCardView.reloadData()
+        DispatchQueue.global(qos: .userInitiated).async {
+            homeVC.apiManager?.getRecs(3)
+            DispatchQueue.main.async {
+                homeVC.songCardView.reloadData()
+            }
+        }
+        
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 //MARK: cell core data functions
