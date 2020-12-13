@@ -56,7 +56,7 @@ class SongTableViewCell: UITableViewCell {
 //        NSURL *url = [NSURL URLWithString:@"https://open.spotify.com/album/0sNOF9WDwhWunNAHPD3Baj"];
 //
 //        [[UIApplication sharedApplication] openURL:url];
-        if let url = URL(string: "https://open.spotify.com/track/\(songID!)"){
+        if let url  = URL(string: "https://open.spotify.com/track/\(songID!)"){
             print(url)
             if UIApplication.shared.canOpenURL(url){
                 UIApplication.shared.open(url)
