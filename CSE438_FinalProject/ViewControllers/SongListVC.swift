@@ -79,13 +79,16 @@ class SongListVC: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    
+    var homeVC: HomeViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         //TODO: dispatch queue
+        guard let thisViewControllerIndex = navigationController?.viewControllers.firstIndex(of: self) else { return }
+        homeVC = navigationController?.viewControllers[thisViewControllerIndex - 1] as? HomeViewController
+        
         songTableView.dataSource = self
         songTableView.delegate = self
         DispatchQueue.global(qos: .userInitiated).async {
@@ -152,6 +155,43 @@ extension SongListVC: UITableViewDelegate{
         return 100.0
     }
     
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            guard let homeVC = homeVC else { return }
+//            print("delete")
+//            //remove from likes in api manager
+//            if let songIndex = homeVC.apiManager?.likedSongs.firstIndex(of: songList[indexPath.row]){
+//                homeVC.apiManager?.likedSongs.remove(at: songIndex)
+//            }
+//            //remove from core data
+//
+//
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            guard let homeVC = homeVC else { return }
+            print("delete")
+            //remove from likes in api manager
+            if let songIndex = homeVC.apiManager?.likedSongs.firstIndex(of: songList[indexPath.row]){
+                homeVC.apiManager?.likedSongs.remove(at: songIndex)
+            }
+            
+            let commit = songList[indexPath.row]
+            context.delete(commit)
+            songList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            do{
+                try context.save()
+            } catch let error {
+                print("error deleting: \(error)")
+            }
+            
+        }
+    }
+    
 //    func tableView
 }
 
@@ -169,9 +209,9 @@ extension SongListVC {
     }
     
     func removeAllSongs(){
-        guard let i = navigationController?.viewControllers.firstIndex(of: self) else { return }
-        guard let homeVC = navigationController?.viewControllers[i - 1] as? HomeViewController else { return }
-    
+//        guard let i = navigationController?.viewControllers.firstIndex(of: self) else { return }
+//        guard let homeVC = navigationController?.viewControllers[i - 1] as? HomeViewController else { return }
+        guard let homeVC = homeVC else { return }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "SongResponse")
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         
@@ -196,6 +236,10 @@ extension SongListVC {
         }
         
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func removeSong(id: String){
+        
     }
 }
 

@@ -84,12 +84,16 @@ class APIManager{
         var seedGenres: String = ""
         
         if(likedSongs.count == 0){
-            DispatchQueue.main.sync {
-                let genrePicker = GenrePickerVC()
-                rootViewController?.performSegue(withIdentifier: "GenrePicker", sender: nil)
-                genrePicker.isModalInPresentation = true
-                
+            if(userGenres.isEmpty){
+                DispatchQueue.main.sync {
+                    let genrePicker = GenrePickerVC()
+                    rootViewController?.performSegue(withIdentifier: "GenrePicker", sender: nil)
+                    genrePicker.isModalInPresentation = true
+                }
+            }else{
+                recommendationLock.signal()
             }
+            
             recommendationLock.wait()
             print("0 likes seeds")
             for genre in userGenres {

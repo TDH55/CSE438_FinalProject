@@ -154,6 +154,13 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
 
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        guard let apiManager = apiManager else { return }
+        if apiManager.isPlaying {
+            apiManager.play()
+        }
+    }
+    
 //    override func viewDidAppear(_ animated: Bool) {
 //        apiManager?.getRecs(3)
 //    }
