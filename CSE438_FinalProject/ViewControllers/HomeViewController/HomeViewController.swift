@@ -9,8 +9,61 @@
 import UIKit
 import Koloda
 import StoreKit
+import MessageUI
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, MFMessageComposeViewControllerDelegate, UIAlertViewDelegate, UITextFieldDelegate {
+    
+    var phoneNumber:String = ""
+    var recipients:[String] = []
+    
+    //https://www.twilio.com/blog/2018/07/sending-text-messages-from-your-ios-app-in-swift-using-mfmessagecomposeviewcontroller.html
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func messageFriend() {
+            let alert = UIAlertController(title: "Enter phone number", message: "Example: 1234567890", preferredStyle: UIAlertController.Style.alert)
+            alert.addTextField(configurationHandler: {
+                (textField: UITextField!) in
+                textField.placeholder = "Phone Number:"
+                textField.isSecureTextEntry = false
+                textField.delegate = self
+            })
+            let nextAction: UIAlertAction = UIAlertAction(title: "Send", style: .default) { action -> Void in
+                let text = (alert.textFields?.first as! UITextField).text
+                self.phoneNumber = text ?? ""
+                print(self.phoneNumber)
+               }
+            alert.addAction(nextAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        func showMessageInterface() {
+            if MFMessageComposeViewController.canSendText() == true {
+                       let messageController = MFMessageComposeViewController()
+                        messageController.messageComposeDelegate  = self
+                        recipients.removeAll()
+                        recipients.append(phoneNumber)
+                let currentSongName = apiManager?.currentSong?.name ?? "nil"
+                let currentArtist = apiManager?.currentSong?.artistName
+                let currentID = apiManager?.currentSong?.id ?? nil
+                print("Got here")
+                if currentSongName != "nil" && currentID != nil {
+                    let body = "Check out this new song I found through MusicMatch! It's called " + currentSongName + ", here's the Spotify link: https://open.spotify.com/track/\(currentID!)"
+                    messageController.body = body
+                }
+                else {
+                    let body = "Check out this new song I found through MusicMatch!"
+                    messageController.body = body
+                }
+                       messageController.recipients = recipients
+                       self.present(messageController, animated: true, completion: nil)
+                   } else {
+                       //handle text messaging not available
+                       print("Cant text")
+                   }
+        }
     
     let apiManager = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.apiManager
     
@@ -43,6 +96,11 @@ class HomeViewController: UIViewController {
     @IBAction func lyricsButton(_ sender: Any) {
 //        let lyricsVC = LyricsViewController()
 //        navigationController?.pushViewController(lyricsVC, animated: true)
+    }
+    
+    @IBAction func shareButton(_ sender: Any) {
+        messageFriend()
+        showMessageInterface()
     }
     
     @IBAction func playPauseButtonPressed(_ sender: Any) {

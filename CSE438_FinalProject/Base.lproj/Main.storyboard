@@ -118,6 +118,9 @@
                                     <color key="titleColor" systemColor="linkColor"/>
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="18" scale="large" weight="semibold"/>
                                 </state>
+                                <connections>
+                                    <action selector="shareButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="xyO-tV-jZX"/>
+                                </connections>
                             </button>
                             <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ChG-hw-v1v" customClass="KolodaView" customModule="Koloda">
                                 <rect key="frame" x="16" y="194.5" width="382" height="477.5"/>
