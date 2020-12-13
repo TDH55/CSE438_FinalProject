@@ -361,22 +361,22 @@ class APIManager{
 extension APIManager: KolodaViewDataSource{
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
             //TODO: create image cache? and give an image for the card here
-        if currentSong?.artworkURL != nil {
-            let url = (currentSong?.artworkURL)!
-        let urlOne = URL(string:  url)
-        let data = try? Data(contentsOf: urlOne!)
-        let image = UIImage(data: data!)
+        if songs[index].artworkURL != nil {
+            let url = (songs[index].artworkURL)
+            let urlOne = URL(string:  url)
+            let data = try? Data(contentsOf: urlOne!)
+            let image = UIImage(data: data!)
             return UIImageView(image: image)
         } else {
-        return UIImageView(image: UIImage(systemName: "star"))
+            return UIImageView(image: UIImage(systemName: "star"))
         }
-        //return UIImageView(image: UIImage(systemName: "star"))
     }
     
        //TODO: create overlay for the card
-        func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
-            return Bundle.main.loadNibNamed("OverlayView", owner: self, options: nil)?[0] as? OverlayView
-        }
+//        func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+//            return Bundle.main.loadNibNamed("OverlayView", owner: self, options: nil)?[0] as? OverlayView
+//        }
+    
     
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
         return songs.count
