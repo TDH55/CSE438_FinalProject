@@ -40,6 +40,8 @@ class APIManager{
     
     var userID: String = ""
     var playlistID: String = ""
+    
+    var currentSong: Song?
 
     //core data setup
     var rootViewController: UIViewController?
@@ -421,6 +423,7 @@ extension APIManager: KolodaViewDelegate{
     }
     
     func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
+        currentSong = songs[index]
         trackURI = songs[index].uri
         if isPlaying {
             appRemote?.playerAPI?.play(trackURI)
