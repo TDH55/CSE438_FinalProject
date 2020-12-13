@@ -373,10 +373,10 @@ extension APIManager: KolodaViewDataSource{
         //return UIImageView(image: UIImage(systemName: "star"))
     }
     
-        //TODO: create overlay for the card
-    //    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
-    //        return Bundle.main.loadNibNamed("OverlayView", owner: self, options: nil)[0] as? OverlayView
-    //    }
+       //TODO: create overlay for the card
+        func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+            return Bundle.main.loadNibNamed("OverlayView", owner: self, options: nil)?[0] as? OverlayView
+        }
     
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
         return songs.count
