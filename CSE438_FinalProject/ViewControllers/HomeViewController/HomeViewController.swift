@@ -22,29 +22,29 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
         controller.dismiss(animated: true, completion: nil)
     }
     
-    func messageFriend() {
-            let alert = UIAlertController(title: "Enter phone number", message: "Example: 1234567890", preferredStyle: UIAlertController.Style.alert)
-            alert.addTextField(configurationHandler: {
-                (textField: UITextField!) in
-                textField.placeholder = "Phone Number:"
-                textField.isSecureTextEntry = false
-                textField.delegate = self
-            })
-            let nextAction: UIAlertAction = UIAlertAction(title: "Send", style: .default) { action -> Void in
-                let text = (alert.textFields?.first as! UITextField).text
-                self.phoneNumber = text ?? ""
-                print(self.phoneNumber)
-               }
-            alert.addAction(nextAction)
-            self.present(alert, animated: true, completion: nil)
-        }
+//    func messageFriend() {
+//            let alert = UIAlertController(title: "Enter phone number", message: "Example: 1234567890", preferredStyle: UIAlertController.Style.alert)
+//            alert.addTextField(configurationHandler: {
+//                (textField: UITextField!) in
+//                textField.placeholder = "Phone Number:"
+//                textField.isSecureTextEntry = false
+//                textField.delegate = self
+//            })
+//            let nextAction: UIAlertAction = UIAlertAction(title: "Send", style: .default) { action -> Void in
+//                let text = (alert.textFields?.first as! UITextField).text
+//                self.phoneNumber = text ?? ""
+//                print(self.phoneNumber)
+//               }
+//            alert.addAction(nextAction)
+//            self.present(alert, animated: true, completion: nil)
+//        }
         
         func showMessageInterface() {
             if MFMessageComposeViewController.canSendText() == true {
                        let messageController = MFMessageComposeViewController()
                         messageController.messageComposeDelegate  = self
-                        recipients.removeAll()
-                        recipients.append(phoneNumber)
+                        //recipients.removeAll()
+                        //recipients.append(phoneNumber)
                 let currentSongName = apiManager?.currentSong?.name ?? "nil"
                 let currentArtist = apiManager?.currentSong?.artistName
                 let currentID = apiManager?.currentSong?.id ?? nil
@@ -52,13 +52,13 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
                 if currentSongName != "nil" && currentID != nil {
                     let body = "Check out this new song I found through MusicMatch! It's called " + currentSongName + ", here's the Spotify link: https://open.spotify.com/track/\(currentID!)"
                     messageController.body = body
+                    messageController.recipients = recipients
+                    self.present(messageController, animated: true, completion: nil)
                 }
                 else {
-                    let body = "Check out this new song I found through MusicMatch!"
-                    messageController.body = body
+                    print("Cant text")
+                    return
                 }
-                       messageController.recipients = recipients
-                       self.present(messageController, animated: true, completion: nil)
                    } else {
                        //handle text messaging not available
                        print("Cant text")
@@ -99,7 +99,7 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
     }
     
     @IBAction func shareButton(_ sender: Any) {
-        messageFriend()
+        //messageFriend()
         showMessageInterface()
     }
     
