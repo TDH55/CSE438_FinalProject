@@ -89,7 +89,7 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
     @IBAction func songListButton(_ sender: Any) {
 //        let songListVC = SongListVC()
 //        navigationController?.pushViewController(songListVC, animated: true)
-        
+        apiManager?.pause()
     }
     
     //TODO: Somethings wrong here when running on device - could be a storyboard issue
@@ -154,7 +154,17 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
 
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        guard let apiManager = apiManager else { return }
+        if apiManager.isPlaying {
+            apiManager.play()
+        }
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        apiManager?.getRecs(3)
+//    }
+    
     /*
     // MARK: - Navigation
 

@@ -21,6 +21,8 @@ class SongTableViewCell: UITableViewCell {
     var songID: String?
     var isLiked: Bool = false
     
+    
+    
     //TODO: Make this an album cover
     @IBOutlet weak var albumCoverButton: UIButton!
     
@@ -62,12 +64,13 @@ class SongTableViewCell: UITableViewCell {
                 UIApplication.shared.open(url)
             }
         }
-        print("topped image")
+        print("tapped image")
     }
     
     
 }
 
+//MARK: View controller
 class SongListVC: UIViewController {
     
     @IBOutlet weak var songTableView: UITableView!
@@ -76,11 +79,16 @@ class SongListVC: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+    var homeVC: HomeViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         //TODO: dispatch queue
+        guard let thisViewControllerIndex = navigationController?.viewControllers.firstIndex(of: self) else { return }
+        homeVC = navigationController?.viewControllers[thisViewControllerIndex - 1] as? HomeViewController
+        
         songTableView.dataSource = self
         songTableView.delegate = self
         DispatchQueue.global(qos: .userInitiated).async {
@@ -91,7 +99,12 @@ class SongListVC: UIViewController {
         }
     }
     
-
+    
+    @IBAction func clearButtonPressed(_ sender: Any) {
+        removeAllSongs()
+    }
+    
+    
     /*
     // MARK: - Navigation
 
@@ -142,6 +155,43 @@ extension SongListVC: UITableViewDelegate{
         return 100.0
     }
     
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            guard let homeVC = homeVC else { return }
+//            print("delete")
+//            //remove from likes in api manager
+//            if let songIndex = homeVC.apiManager?.likedSongs.firstIndex(of: songList[indexPath.row]){
+//                homeVC.apiManager?.likedSongs.remove(at: songIndex)
+//            }
+//            //remove from core data
+//
+//
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            guard let homeVC = homeVC else { return }
+            print("delete")
+            //remove from likes in api manager
+            if let songIndex = homeVC.apiManager?.likedSongs.firstIndex(of: songList[indexPath.row]){
+                homeVC.apiManager?.likedSongs.remove(at: songIndex)
+            }
+            
+            let commit = songList[indexPath.row]
+            context.delete(commit)
+            songList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            do{
+                try context.save()
+            } catch let error {
+                print("error deleting: \(error)")
+            }
+            
+        }
+    }
+    
 //    func tableView
 }
 
@@ -158,6 +208,39 @@ extension SongListVC {
         //TODO: handle images if we want them on this screen
     }
     
+    func removeAllSongs(){
+//        guard let i = navigationController?.viewControllers.firstIndex(of: self) else { return }
+//        guard let homeVC = navigationController?.viewControllers[i - 1] as? HomeViewController else { return }
+        guard let homeVC = homeVC else { return }
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "SongResponse")
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try context.execute(batchDeleteRequest)
+        } catch let error {
+            print("error deleting: \(error)")
+        }
+        
+        songList = []
+        songTableView.reloadData()
+//
+        homeVC.apiManager?.songs = []
+        homeVC.apiManager?.likedSongs = []
+//        homeVC.songCardView.reloadData()
+        homeVC.songCardView.reloadData()
+        DispatchQueue.global(qos: .userInitiated).async {
+            homeVC.apiManager?.getRecs(3)
+            DispatchQueue.main.async {
+                homeVC.songCardView.reloadData()
+            }
+        }
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func removeSong(id: String){
+        
+    }
 }
 
 //MARK: cell core data functions
