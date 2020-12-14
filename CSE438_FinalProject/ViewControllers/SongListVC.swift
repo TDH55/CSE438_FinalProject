@@ -130,6 +130,12 @@ extension SongListVC: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SongTableViewCell
         cell.songTitleLabel!.text = songList[indexPath.row].value(forKey: "name") as? String
         cell.songArtistLabel!.text = songList[indexPath.row].value(forKey: "artistName") as? String
+        let url = songList[indexPath.row].value(forKey: "artworkURL") as! String
+        let urlOne = URL(string:  url)
+        let data = try? Data(contentsOf: urlOne!)
+        let image = UIImage(data: data!)
+        cell.albumCoverButton.setTitle("", for: .normal)
+        cell.albumCoverButton.setBackgroundImage(image, for: .normal)
         
         cell.songID = songList[indexPath.row].value(forKey: "id") as? String
         
