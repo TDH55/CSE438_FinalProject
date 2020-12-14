@@ -250,30 +250,6 @@ class APIManager{
         return genres
     }
     
-    func getUserID() -> String {
-        var returnValue: String = ""
-        let lock = DispatchSemaphore(value: 0)
-        let requestURL = URL(string: "https://api.spotify.com/v1/me")!
-        var profileRequest = URLRequest(url: requestURL)
-        
-        profileRequest.httpMethod = "GET"
-        profileRequest.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
-        
-        URLSession.shared.dataTask(with: profileRequest) {(data, response, error) in
-            guard error == nil else {
-                print("error: \(String(describing: error))")
-                return
-            }
-            
-            if let json = try? JSON(data: data!){
-                returnValue = json["id"].string!
-                lock.signal()
-            }
-        }.resume()
-        
-        lock.wait()
-        return returnValue
-    }
 }
 
 
@@ -284,7 +260,6 @@ extension APIManager: KolodaViewDataSource{
             //TODO: create image cache? and give an image for the card here
         
         
-        if songs[index].artworkURL != nil {
             let url = (songs[index].artworkURL)
             let urlOne = URL(string:  url)
             let data = try? Data(contentsOf: urlOne!)
@@ -301,20 +276,7 @@ extension APIManager: KolodaViewDataSource{
             let imageView = UIImageView(image:image)
             imageView.addSubview(nameAndArtist)
             return imageView
-        } else {
-            let nameAndArtist = UITextView(frame:CGRect(x: 20, y: 346, width: 300, height: 75))
-            nameAndArtist.font = UIFont.systemFont(ofSize: 15)
-            nameAndArtist.textColor = UIColor.white
-            nameAndArtist.backgroundColor = UIColor.black
-            nameAndArtist.isEditable = false
-            nameAndArtist.textAlignment = .center
-            nameAndArtist.textContainer.maximumNumberOfLines = 3
-            nameAndArtist.layer.cornerRadius = 10
-            nameAndArtist.text = songs[index].name + " by " + songs[index].artistName
-            let imageView = UIImageView(image: UIImage(systemName: "star"))
-            imageView.addSubview(nameAndArtist)
-            return imageView
-        }
+
     }
     
     
@@ -413,16 +375,4 @@ extension APIManager{
         }
     }
     
-    func getResponseIDs(){
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SongResponse")
-        
-        do {
-            for song in try context.fetch(fetchRequest){
-                let songID = song.value(forKey: "id") as! String
-                responseIDs.append(songID)
-            }
-        } catch let error {
-            print("Error fetching from core data \(error)")
-        }
-    }
 }

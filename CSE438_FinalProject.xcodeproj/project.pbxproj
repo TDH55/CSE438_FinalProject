@@ -20,13 +20,10 @@
 		56C33756256789DC00F4F95F /* KolodaViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C33755256789DC00F4F95F /* KolodaViewDataSource.swift */; };
 		56C3375825678A2800F4F95F /* KolodaViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3375725678A2800F4F95F /* KolodaViewDelegate.swift */; };
 		56C3375B25678D7A00F4F95F /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3375A25678D7A00F4F95F /* Song.swift */; };
-		56C3375D2567902E00F4F95F /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3375C2567902E00F4F95F /* Album.swift */; };
-		56C3375F2567903200F4F95F /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C3375E2567903200F4F95F /* Artist.swift */; };
 		56C337612567926600F4F95F /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C337602567926600F4F95F /* APIResponse.swift */; };
 		56C337642567953700F4F95F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C337632567953700F4F95F /* CardView.swift */; };
 		56E43232256327660088D117 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E43231256327660088D117 /* AppDelegate.swift */; };
 		56E43234256327660088D117 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E43233256327660088D117 /* SceneDelegate.swift */; };
-		56E43236256327660088D117 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E43235256327660088D117 /* ViewController.swift */; };
 		56E43239256327660088D117 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56E43237256327660088D117 /* Main.storyboard */; };
 		56E4323B256327680088D117 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56E4323A256327680088D117 /* Assets.xcassets */; };
 		56E4323E256327680088D117 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56E4323C256327680088D117 /* LaunchScreen.storyboard */; };
@@ -50,14 +47,11 @@
 		56C33755256789DC00F4F95F /* KolodaViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KolodaViewDataSource.swift; sourceTree = "<group>"; };
 		56C3375725678A2800F4F95F /* KolodaViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KolodaViewDelegate.swift; sourceTree = "<group>"; };
 		56C3375A25678D7A00F4F95F /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
-		56C3375C2567902E00F4F95F /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
-		56C3375E2567903200F4F95F /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		56C337602567926600F4F95F /* APIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIResponse.swift; sourceTree = "<group>"; };
 		56C337632567953700F4F95F /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		56E4322E256327660088D117 /* CSE438_FinalProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CSE438_FinalProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56E43231256327660088D117 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56E43233256327660088D117 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		56E43235256327660088D117 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		56E43238256327660088D117 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		56E4323A256327680088D117 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56E4323D256327680088D117 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -119,7 +113,6 @@
 				CFAEE1242574A676008320BA /* LyricsViewController.swift */,
 				5648E5CB2574AD81004DC7AB /* SongListVC.swift */,
 				56C337512567895300F4F95F /* HomeViewController */,
-				56E43235256327660088D117 /* ViewController.swift */,
 				567EC8762584D4FB00EA9384 /* GenrePickerVC.swift */,
 			);
 			path = ViewControllers;
@@ -147,8 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				56C3375A25678D7A00F4F95F /* Song.swift */,
-				56C3375C2567902E00F4F95F /* Album.swift */,
-				56C3375E2567903200F4F95F /* Artist.swift */,
 				56C337602567926600F4F95F /* APIResponse.swift */,
 			);
 			path = Models;
@@ -323,10 +314,8 @@
 				5621B05625808DDD00F0B669 /* APIManager.swift in Sources */,
 				5621B048257EFF1B00F0B669 /* Responses.xcdatamodeld in Sources */,
 				56C3375B25678D7A00F4F95F /* Song.swift in Sources */,
-				56E43236256327660088D117 /* ViewController.swift in Sources */,
 				56E43232256327660088D117 /* AppDelegate.swift in Sources */,
 				56C337612567926600F4F95F /* APIResponse.swift in Sources */,
-				56C3375F2567903200F4F95F /* Artist.swift in Sources */,
 				56E43234256327660088D117 /* SceneDelegate.swift in Sources */,
 				567EC8662584C24500EA9384 /* AlertGenreView.swift in Sources */,
 				5648E5CC2574AD81004DC7AB /* SongListVC.swift in Sources */,
@@ -336,7 +325,6 @@
 				56C337502567887D00F4F95F /* HomeViewController.swift in Sources */,
 				56C337642567953700F4F95F /* CardView.swift in Sources */,
 				567EC87A2585023100EA9384 /* SpotifySetup.swift in Sources */,
-				56C3375D2567902E00F4F95F /* Album.swift in Sources */,
 				CFAEE1252574A676008320BA /* LyricsViewController.swift in Sources */,
 				567EC8772584D4FB00EA9384 /* GenrePickerVC.swift in Sources */,
 			);

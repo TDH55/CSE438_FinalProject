@@ -130,6 +130,7 @@ extension SongListVC: UITableViewDataSource{
         cell.songTitleLabel!.text = songList[indexPath.row].value(forKey: "name") as? String
         cell.songArtistLabel!.text = songList[indexPath.row].value(forKey: "artistName") as? String
         let image = imageCache[indexPath.row]
+//        let image = UIImage(systemName: "star")
         cell.albumCoverButton.setTitle("", for: .normal)
         cell.albumCoverButton.setBackgroundImage(image, for: .normal)
         
