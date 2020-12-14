@@ -81,6 +81,8 @@ class SongListVC: UIViewController {
     
     var homeVC: HomeViewController?
     
+    var imageCache: [UIImage] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -94,6 +96,7 @@ class SongListVC: UIViewController {
         songTableView.delegate = self
         DispatchQueue.global(qos: .userInitiated).async {
             self.getSongList()
+            self.cacheImages()
             DispatchQueue.main.async {
                 self.songTableView.reloadData()
             }
@@ -130,10 +133,11 @@ extension SongListVC: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SongTableViewCell
         cell.songTitleLabel!.text = songList[indexPath.row].value(forKey: "name") as? String
         cell.songArtistLabel!.text = songList[indexPath.row].value(forKey: "artistName") as? String
-        let url = songList[indexPath.row].value(forKey: "artworkURL") as! String
-        let urlOne = URL(string:  url)
-        let data = try? Data(contentsOf: urlOne!)
-        let image = UIImage(data: data!)
+//        let url = songList[indexPath.row].value(forKey: "artworkURL") as! String
+//        let urlOne = URL(string:  url)
+//        let data = try? Data(contentsOf: urlOne!)
+//        let image = UIImage(data: data!)
+        let image = imageCache[indexPath.row]
         cell.albumCoverButton.setTitle("", for: .normal)
         cell.albumCoverButton.setBackgroundImage(image, for: .normal)
         
@@ -264,6 +268,32 @@ extension SongTableViewCell {
             }
         } catch let error {
             print("error updating liked status: \(error)")
+        }
+    }
+}
+
+
+extension SongListVC {
+    func cacheImages(){
+        for song in songList {
+            let lock = DispatchSemaphore(value: 0)
+            var imageData: Data?
+            let artworkURL = song.value(forKey: "artworkURL") as! String
+            let url = URL(string:  artworkURL)!
+            print(url)
+            URLSession.shared.dataTask(with: url) {(data, response, error) in
+                print("url session")
+                guard error == nil else { return }
+                
+                imageData = data
+                lock.signal()
+            }.resume()
+//            let data = try? Data(contentsOf: urlOne!)
+//            var image: UIImage?
+//            print(imageData)
+            lock.wait()
+            let image = UIImage(data: imageData!)!
+            imageCache.append(image)
         }
     }
 }
