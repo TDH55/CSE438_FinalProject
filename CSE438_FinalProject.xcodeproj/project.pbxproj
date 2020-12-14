@@ -10,6 +10,7 @@
 		5621B048257EFF1B00F0B669 /* Responses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5621B046257EFF1B00F0B669 /* Responses.xcdatamodeld */; };
 		5621B05625808DDD00F0B669 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621B05525808DDD00F0B669 /* APIManager.swift */; };
 		5648E5CC2574AD81004DC7AB /* SongListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648E5CB2574AD81004DC7AB /* SongListVC.swift */; };
+		56684010258797AB006FB774 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 5668400F258797AB006FB774 /* README.md */; };
 		567EC8522584BA4600EA9384 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567EC8512584BA4600EA9384 /* UIAlertControllerExtension.swift */; };
 		567EC8632584C21500EA9384 /* AlertGenreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567EC8622584C21500EA9384 /* AlertGenreView.xib */; };
 		567EC8662584C24500EA9384 /* AlertGenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567EC8652584C24500EA9384 /* AlertGenreView.swift */; };
@@ -36,6 +37,7 @@
 		5621B047257EFF1B00F0B669 /* Responses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Responses.xcdatamodel; sourceTree = "<group>"; };
 		5621B05525808DDD00F0B669 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		5648E5CB2574AD81004DC7AB /* SongListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListVC.swift; sourceTree = "<group>"; };
+		5668400F258797AB006FB774 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		567EC8512584BA4600EA9384 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		567EC8622584C21500EA9384 /* AlertGenreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertGenreView.xib; sourceTree = "<group>"; };
 		567EC8652584C24500EA9384 /* AlertGenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertGenreView.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		56E43225256327660088D117 = {
 			isa = PBXGroup;
 			children = (
+				5668400F258797AB006FB774 /* README.md */,
 				56A5D409257AF74E0019DE8D /* CSE438_FinalProject-Bridging-Header.h */,
 				56A5D405257AF5B80019DE8D /* SpotifyiOS.framework */,
 				56E43230256327660088D117 /* CSE438_FinalProject */,
@@ -257,6 +260,7 @@
 			files = (
 				56E4323E256327680088D117 /* LaunchScreen.storyboard in Resources */,
 				56E4323B256327680088D117 /* Assets.xcassets in Resources */,
+				56684010258797AB006FB774 /* README.md in Resources */,
 				56E43239256327660088D117 /* Main.storyboard in Resources */,
 				567EC8632584C21500EA9384 /* AlertGenreView.xib in Resources */,
 			);
