@@ -204,16 +204,16 @@
             </objects>
             <point key="canvasLocation" x="1949.2753623188407" y="137.27678571428569"/>
         </scene>
-        <!--View Controller-->
+        <!--Song Name-->
         <scene sceneID="oM1-PI-t1d">
             <objects>
-                <viewController id="kW6-1i-Bno" sceneMemberID="viewController">
+                <viewController id="kW6-1i-Bno" customClass="LyricsViewController" customModule="CSE438_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="I9t-Mg-Vaw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDp-qm-EKk">
-                                <rect key="frame" x="20" y="121" width="374" height="741"/>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sU4-yF-hhv">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -224,19 +224,23 @@
                         <viewLayoutGuide key="safeArea" id="Ec3-dK-Vyb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="dDp-qm-EKk" firstAttribute="trailing" secondItem="I9t-Mg-Vaw" secondAttribute="trailingMargin" id="RUN-zp-Br4"/>
-                            <constraint firstItem="dDp-qm-EKk" firstAttribute="leading" secondItem="I9t-Mg-Vaw" secondAttribute="leadingMargin" id="UIu-oj-Lre"/>
-                            <constraint firstItem="dDp-qm-EKk" firstAttribute="top" secondItem="Ec3-dK-Vyb" secondAttribute="top" constant="33" id="cfq-zp-dAI"/>
-                            <constraint firstItem="dDp-qm-EKk" firstAttribute="bottom" secondItem="Ec3-dK-Vyb" secondAttribute="bottom" id="v82-Xl-KuI"/>
+                            <constraint firstItem="sU4-yF-hhv" firstAttribute="top" secondItem="Ec3-dK-Vyb" secondAttribute="top" id="IUT-pI-V4A"/>
+                            <constraint firstItem="sU4-yF-hhv" firstAttribute="leading" secondItem="Ec3-dK-Vyb" secondAttribute="leading" id="Nt3-gB-MbZ"/>
+                            <constraint firstItem="Ec3-dK-Vyb" firstAttribute="trailing" secondItem="sU4-yF-hhv" secondAttribute="trailing" id="gnE-a6-mPg"/>
+                            <constraint firstItem="Ec3-dK-Vyb" firstAttribute="bottom" secondItem="sU4-yF-hhv" secondAttribute="bottom" id="oGE-EA-nMH"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6h0-k0-o16"/>
+                    <navigationItem key="navigationItem" title="Song Name" id="6h0-k0-o16"/>
+                    <connections>
+                        <outlet property="geniuseWebView" destination="sU4-yF-hhv" id="gOj-em-opb"/>
+                        <outlet property="navbar" destination="6h0-k0-o16" id="67u-Pb-lc0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xrb-aj-Otb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1947.826086956522" y="852.45535714285711"/>
         </scene>
-        <!--Song ListVC-->
+        <!--Liked Songs-->
         <scene sceneID="nbf-0U-Kwb">
             <objects>
                 <viewController id="1AA-JL-cLI" customClass="SongListVC" customModule="CSE438_FinalProject" customModuleProvider="target" sceneMemberID="viewController">
@@ -244,14 +248,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Liked Songs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCa-Sg-6Bd">
-                                <rect key="frame" x="94" y="105" width="226" height="50.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="42"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="br6-jJ-tw8">
-                                <rect key="frame" x="16" y="171.5" width="382" height="674.5"/>
+                                <rect key="frame" x="16" y="104" width="382" height="742"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="AeU-Ew-B5d" customClass="SongTableViewCell" customModule="CSE438_FinalProject" customModuleProvider="target">
@@ -335,15 +333,13 @@
                         <viewLayoutGuide key="safeArea" id="UIq-6H-p97"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="br6-jJ-tw8" firstAttribute="top" secondItem="qCa-Sg-6Bd" secondAttribute="bottom" constant="16" id="0ma-gO-G61"/>
                             <constraint firstItem="UIq-6H-p97" firstAttribute="bottom" secondItem="br6-jJ-tw8" secondAttribute="bottom" constant="16" id="9qU-CT-xS7"/>
                             <constraint firstItem="br6-jJ-tw8" firstAttribute="leading" secondItem="UIq-6H-p97" secondAttribute="leading" constant="16" id="XHy-hH-RZ7"/>
-                            <constraint firstItem="qCa-Sg-6Bd" firstAttribute="top" secondItem="UIq-6H-p97" secondAttribute="top" constant="17" id="evL-on-Dlu"/>
-                            <constraint firstItem="qCa-Sg-6Bd" firstAttribute="centerX" secondItem="br6-jJ-tw8" secondAttribute="centerX" id="t2g-pO-fMg"/>
+                            <constraint firstItem="br6-jJ-tw8" firstAttribute="top" secondItem="UIq-6H-p97" secondAttribute="top" constant="16" id="eUe-uv-7sz"/>
                             <constraint firstItem="UIq-6H-p97" firstAttribute="trailing" secondItem="br6-jJ-tw8" secondAttribute="trailing" constant="16" id="wty-1b-WrF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="kKC-RH-7LR">
+                    <navigationItem key="navigationItem" title="Liked Songs" id="kKC-RH-7LR">
                         <barButtonItem key="rightBarButtonItem" title="Clear" id="P0P-jc-9Rp">
                             <connections>
                                 <action selector="clearButtonPressed:" destination="1AA-JL-cLI" id="414-4i-XvJ"/>

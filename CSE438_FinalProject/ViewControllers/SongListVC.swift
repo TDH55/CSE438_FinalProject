@@ -83,7 +83,8 @@ class SongListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationController?.navigationBar.isHidden = false
         // Do any additional setup after loading the view.
         //TODO: dispatch queue
         guard let thisViewControllerIndex = navigationController?.viewControllers.firstIndex(of: self) else { return }
