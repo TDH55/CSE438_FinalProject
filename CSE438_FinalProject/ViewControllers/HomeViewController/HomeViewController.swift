@@ -152,12 +152,12 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
             playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: playPauseImageConfig), for: .normal)
         }
         
-        navigationController?.navigationBar.isHidden = true
+        //navigationController?.navigationBar.isHidden = true
 
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
+        //navigationController?.navigationBar.isHidden = true
         guard let apiManager = apiManager else { return }
         if apiManager.isPlaying {
             apiManager.play()

@@ -24,7 +24,7 @@ class LyricsViewController: UIViewController {
         didSet {
             DispatchQueue.main.sync {
                 guard let url = URL(string: songURL) else {
-                    let alert = UIAlertController(title: "Lyrics not found", message: "We were not able to find lyrics for this son", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Lyrics not found", message: "We were not able to find lyrics for this song", preferredStyle: .alert)
                     
                     let dimsissAction = UIAlertAction(title: "OK", style: .default){ _ in
                         alert.dismiss(animated: true, completion: nil)
