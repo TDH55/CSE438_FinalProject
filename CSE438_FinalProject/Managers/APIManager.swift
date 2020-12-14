@@ -364,19 +364,51 @@ class APIManager{
 extension APIManager: KolodaViewDataSource{
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
             //TODO: create image cache? and give an image for the card here
+        
+        
         if songs[index].artworkURL != nil {
             let url = (songs[index].artworkURL)
             let urlOne = URL(string:  url)
             let data = try? Data(contentsOf: urlOne!)
             let image = UIImage(data: data!)
-            return UIImageView(image: image)
+            let nameAndArtist = UITextView(frame:CGRect(x: 20, y: 346, width: 300, height: 75))
+            nameAndArtist.font = UIFont.systemFont(ofSize: 15)
+            nameAndArtist.textColor = UIColor.white
+            nameAndArtist.backgroundColor = UIColor.black
+            nameAndArtist.isEditable = false
+            nameAndArtist.textAlignment = .center
+            nameAndArtist.textContainer.maximumNumberOfLines = 3
+            nameAndArtist.layer.cornerRadius = 10
+            nameAndArtist.text = songs[index].name + " by " + songs[index].artistName
+            let imageView = UIImageView(image:image)
+            imageView.addSubview(nameAndArtist)
+            return imageView
         } else {
-            return UIImageView(image: UIImage(systemName: "star"))
+            let nameAndArtist = UITextView(frame:CGRect(x: 20, y: 346, width: 300, height: 75))
+            nameAndArtist.font = UIFont.systemFont(ofSize: 15)
+            nameAndArtist.textColor = UIColor.white
+            nameAndArtist.backgroundColor = UIColor.black
+            nameAndArtist.isEditable = false
+            nameAndArtist.textAlignment = .center
+            nameAndArtist.textContainer.maximumNumberOfLines = 3
+            nameAndArtist.layer.cornerRadius = 10
+            nameAndArtist.text = songs[index].name + " by " + songs[index].artistName
+            let imageView = UIImageView(image: UIImage(systemName: "star"))
+            imageView.addSubview(nameAndArtist)
+            return imageView
         }
     }
     
        //TODO: create overlay for the card
 //        func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+//            var overlayContentView:UIView
+//            let x = 0
+//            let y = 0
+//            let width = 100
+//            let height = 100
+//            let overlayView = UIView(frame: CGRect(x:x, y:y, width:width, height: height))
+//            overlayView.backgroundColor = UIColor.red
+//            return overlayView as? OverlayView
 //            return Bundle.main.loadNibNamed("OverlayView", owner: self, options: nil)?[0] as? OverlayView
 //        }
     
