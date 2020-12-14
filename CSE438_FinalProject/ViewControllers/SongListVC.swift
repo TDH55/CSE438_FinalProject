@@ -23,7 +23,6 @@ class SongTableViewCell: UITableViewCell {
     
     
     
-    //TODO: Make this an album cover
     @IBOutlet weak var albumCoverButton: UIButton!
     
     //TODO: add button functionality and update the button display
@@ -35,7 +34,6 @@ class SongTableViewCell: UITableViewCell {
             likeButton.setImage(UIImage(systemName: "hand.thumbsup.fill", withConfiguration: thumbImageConfig), for: .normal)
             dislikeButton.setImage(UIImage(systemName: "hand.thumbsdown", withConfiguration: thumbImageConfig), for: .normal)
             
-            //TODO: update core data
             guard let songID = songID else { return }
             updateLiked(songID: songID, true)
         }
@@ -47,7 +45,7 @@ class SongTableViewCell: UITableViewCell {
             likeButton.setImage(UIImage(systemName: "hand.thumbsup", withConfiguration: thumbImageConfig), for: .normal)
             dislikeButton.setImage(UIImage(systemName: "hand.thumbsdown.fill", withConfiguration: thumbImageConfig), for: .normal)
             
-            //TODO: update core data
+            //update core data
             guard let songID = songID else { return }
             updateLiked(songID: songID, false)
         }
@@ -57,7 +55,6 @@ class SongTableViewCell: UITableViewCell {
     @IBAction func imageTapped(_ sender: Any) {
 //        NSURL *url = [NSURL URLWithString:@"https://open.spotify.com/album/0sNOF9WDwhWunNAHPD3Baj"];
 //
-//        [[UIApplication sharedApplication] openURL:url];
         if let url  = URL(string: "https://open.spotify.com/track/\(songID!)"){
             print(url)
             if UIApplication.shared.canOpenURL(url){
@@ -88,7 +85,6 @@ class SongListVC: UIViewController {
         
         navigationController?.navigationBar.isHidden = false
         // Do any additional setup after loading the view.
-        //TODO: dispatch queue
         guard let thisViewControllerIndex = navigationController?.viewControllers.firstIndex(of: self) else { return }
         homeVC = navigationController?.viewControllers[thisViewControllerIndex - 1] as? HomeViewController
         
@@ -128,15 +124,11 @@ extension SongListVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+        //set up table view cell
         let thumbImageConfig = UIImage.SymbolConfiguration(pointSize: 24.0)
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SongTableViewCell
         cell.songTitleLabel!.text = songList[indexPath.row].value(forKey: "name") as? String
         cell.songArtistLabel!.text = songList[indexPath.row].value(forKey: "artistName") as? String
-//        let url = songList[indexPath.row].value(forKey: "artworkURL") as! String
-//        let urlOne = URL(string:  url)
-//        let data = try? Data(contentsOf: urlOne!)
-//        let image = UIImage(data: data!)
         let image = imageCache[indexPath.row]
         cell.albumCoverButton.setTitle("", for: .normal)
         cell.albumCoverButton.setBackgroundImage(image, for: .normal)
@@ -165,22 +157,8 @@ extension SongListVC: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
     }
-    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            guard let homeVC = homeVC else { return }
-//            print("delete")
-//            //remove from likes in api manager
-//            if let songIndex = homeVC.apiManager?.likedSongs.firstIndex(of: songList[indexPath.row]){
-//                homeVC.apiManager?.likedSongs.remove(at: songIndex)
-//            }
-//            //remove from core data
-//
-//
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//    }
-    
+
+    //delete from list and core data
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             guard let homeVC = homeVC else { return }
@@ -216,12 +194,10 @@ extension SongListVC {
             print("Error fetching from core data \(error)")
         }
         
-        //TODO: handle images if we want them on this screen
     }
     
+    //remove all songs from core data, empty all lists where they are included, and update table view
     func removeAllSongs(){
-//        guard let i = navigationController?.viewControllers.firstIndex(of: self) else { return }
-//        guard let homeVC = navigationController?.viewControllers[i - 1] as? HomeViewController else { return }
         guard let homeVC = homeVC else { return }
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "SongResponse")
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
@@ -256,6 +232,7 @@ extension SongListVC {
 
 //MARK: cell core data functions
 extension SongTableViewCell {
+    //udpate if song was liked or diliked
     func updateLiked(songID: String, _ likeChangedTo: Bool) {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SongResponse")
         fetchRequest.predicate = NSPredicate(format: "id == '\(songID)'")
@@ -274,6 +251,7 @@ extension SongTableViewCell {
 
 
 extension SongListVC {
+    //get and add images to cache
     func cacheImages(){
         for song in songList {
             let lock = DispatchSemaphore(value: 0)
@@ -288,9 +266,6 @@ extension SongListVC {
                 imageData = data
                 lock.signal()
             }.resume()
-//            let data = try? Data(contentsOf: urlOne!)
-//            var image: UIImage?
-//            print(imageData)
             lock.wait()
             let image = UIImage(data: imageData!)!
             imageCache.append(image)

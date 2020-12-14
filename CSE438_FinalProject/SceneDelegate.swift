@@ -41,9 +41,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         if let _ = self.appRemote.connectionParameters.accessToken {
             self.appRemote.connect()
-//            self.appRemote.authorizeAndPlayURI("")
             apiManager.pause()
-//            apiManager.getCards()
         }
     }
 
@@ -75,7 +73,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
     }()
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-//        print("1")
         guard let url = URLContexts.first?.url else {
             return
         }
@@ -104,8 +101,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
                 }
             })
             self.apiManager.userToken = self.accessToken
-//            self.apiManager.userID = self.apiManager.getUserID()
-//            self.apiManager.initializePlaylist()
             DispatchQueue.global(qos: .userInitiated).async {
                 self.apiManager.getRecs(3)
                 DispatchQueue.main.async {
@@ -116,8 +111,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
         establishedConnectionHasRun = true
         print("connected")
         
-//        self.apiManager.getRecs()
-//        homeViewController?.songCardView.reloadData()
     }
 
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
@@ -129,8 +122,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, SPTAppRemoteDelegate, S
     }
     
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-//        print("player state changed")
-//        debugPrint("Track name: %@", playerState.track.name)
     }
     
 }

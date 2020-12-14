@@ -11,10 +11,7 @@ import SwiftyJSON
 import Koloda
 import CoreData
 
-
-//TODO: add to a playlist
-//TODO: initial recs
-
+ //used to interact with the api
 class APIManager{
         
     //sets tha ppRemote to what was defined in scene delegate
@@ -76,13 +73,13 @@ class APIManager{
     
     //use this to get the initial recs upon login
     func getRecs(_ numberOfRecs: Int) {
-        //TODO: if cordata is empty, execute random query, else set parameters based on 5 random songs/artists
-        //TODO: we shoulp probably call this on a background thread
-        //keeps function from returning before the request is complete
+        //if cordata is empty, execute random query, else set parameters based on 5 random songs/artists
         var seedArtists: String = ""
         var seedTracks: String = ""
         var seedGenres: String = ""
         
+        //generate seeds based on number of liked songs
+        //if none, use selected genres
         if(likedSongs.count == 0){
             if(userGenres.isEmpty){
                 DispatchQueue.main.sync {
@@ -103,7 +100,7 @@ class APIManager{
                     seedGenres.append(",\(genre)")
                 }
             }
-        } else if(likedSongs.count < 3) {
+        } else if(likedSongs.count < 3) { //if 5 or less, use all artist and songs
             print(" < 3 likes seeds")
             for song in likedSongs {
                 //add seed for artist and song
@@ -119,7 +116,7 @@ class APIManager{
                     seedTracks.append(",\(song.value(forKey: "id") as! String)")
                 }
             }
-        } else {
+        } else { //else use random artists/ songs from liked songs
             print("normal seed case")
             //rng from 0 to count * 2
             var seedNumbers: [Int] = []
@@ -220,6 +217,7 @@ class APIManager{
         return
     }
     
+    //get all generes, used in genre picker vc
     func getGenres() -> [String] {
         let lock = DispatchSemaphore(value: 0)
         let requestURL = URL(string: "https://api.spotify.com/v1/recommendations/available-genre-seeds")!
@@ -278,90 +276,10 @@ class APIManager{
     }
 }
 
-////MARK: Playlist functions
-//extension APIManager{
-//    func initializePlaylist(){
-//        print("initialize playlist")
-//        //check if playlist exists, set playlist id if it does
-//        var playlists: [Playlist]
-//        let lock = DispatchSemaphore(value: 0)
-//        let getPlaylistsRequestURL = URL(string: "https://api.spotify.com/v1/me/playlists")!
-//        var getPlaylistsRequest = URLRequest(url: getPlaylistsRequestURL)
-//
-//        getPlaylistsRequest.httpMethod = "GET"
-//        getPlaylistsRequest.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
-//
-//        var playlistRequestResponse: PlaylistResponse?
-//        URLSession.shared.dataTask(with: getPlaylistsRequest) {(data, response, error) in
-//            guard error == nil else {
-//                print("error finding playlist: \(String(describing: error))")
-//                return
-//            }
-//            do {
-//                guard let data = data else { return }
-//                playlistRequestResponse = try JSONDecoder().decode(PlaylistResponse.self, from: data)
-//                for item in playlistRequestResponse!.items {
-//                    if(item.name == "Music Match Playlist"){
-//                        self.playlistID = item.id
-//                        return
-//                    }
-//                }
-//                lock.signal()
-//            }catch let error {
-//                print("error \(error)")
-//            }
-//        }.resume()
-//        lock.wait()
-//        //if it does not exist, create a playlist and set playlist id
-//
-//        let createPlaylistURL = URL(string: "https://api.spotify.com/v1/users/\(userID)/playlists")!
-//        var createPlaylistRequest = URLRequest(url: createPlaylistURL)
-//
-//        let body: [String: Any] = ["name": "Music Match Playlist", "description": "This playslist contains the songs you've liked in Music Match", "public": false]
-//        let bodyData = try? JSONSerialization.data(withJSONObject: body, options: [])
-//
-//        createPlaylistRequest.httpMethod = "POST"
-//        createPlaylistRequest.setValue("Bearer \(userToken)", forHTTPHeaderField: "Authorization")
-//        createPlaylistRequest.httpBody = bodyData
-//
-//        print("create playlist")
-//        var createPlaylistResponse: Playlist?
-//        URLSession.shared.dataTask(with: createPlaylistRequest) {(data, response, error) in
-//            guard error == nil else {
-//                print("error creating: \(error)")
-//                return
-//            }
-//            print(response)
-//
-//            if let json = try? JSON(data: data!){
-//                print(json.rawString())
-//            }
-////            do{
-////                guard let data = data else { return }
-////                createPlaylistResponse = try JSONDecoder().decode(Playlist.self, from: data)
-////                print(createPlaylistResponse)
-////                self.playlistID = createPlaylistResponse!.id
-////                lock.signal()
-////            } catch let error {
-////                print("error decoding playlist: \(error)")
-////            }
-//        }.resume()
-//        lock.wait()
-//        return
-//
-//    }
-//
-//    func addSongToPlaylist(songID: String){
-//
-//    }
-//
-//    func removeSongFromPlaylist(songID: String){
-//
-//    }
-//}
 
 //MARK: KolodaViewDataSource
 extension APIManager: KolodaViewDataSource{
+    //set up kolda card
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
             //TODO: create image cache? and give an image for the card here
         
@@ -399,19 +317,6 @@ extension APIManager: KolodaViewDataSource{
         }
     }
     
-       //TODO: create overlay for the card
-//        func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
-//            var overlayContentView:UIView
-//            let x = 0
-//            let y = 0
-//            let width = 100
-//            let height = 100
-//            let overlayView = UIView(frame: CGRect(x:x, y:y, width:width, height: height))
-//            overlayView.backgroundColor = UIColor.red
-//            return overlayView as? OverlayView
-//            return Bundle.main.loadNibNamed("OverlayView", owner: self, options: nil)?[0] as? OverlayView
-//        }
-    
     
     func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
         return songs.count
@@ -424,37 +329,23 @@ extension APIManager: KolodaViewDataSource{
 
 //MARK: KolodaViewDelegate
 extension APIManager: KolodaViewDelegate{
-    func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-        //TODO: get new songs
-        //TODO: this will probably be replaced
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            self.getRecs(3)
-//            DispatchQueue.main.async {
-//                koloda.reloadData()
-//            }
-//        }
-//        getRecs()
-//        koloda.reloadData()
-    }
+
     
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
-        //TODO: asynchronously add a song to the back of the array everytip a card is swiped -> call getSingleRec()
-        //TODO: add to likes/dislikes on swipe
         
         switch (direction){
         case .right:
-//            print("right")
+            //add to liked responses
             AddResponse(song: songs[index], liked: true)
         case .left:
-//            print("left")
-            AddResponse(song: songs[index], liked: false)
-        case .up:
-            print("up")
+        //add to disliked repsonses
+        AddResponse(song: songs[index], liked: false)
         default:
             print("default")
         }
         
         DispatchQueue.global(qos: .userInitiated).async {
+            //get a new rec and load new card
             self.getRecs(1)
             DispatchQueue.main.async {
                 koloda.reloadData()
@@ -467,6 +358,7 @@ extension APIManager: KolodaViewDelegate{
     }
     
     func koloda(_ koloda: KolodaView, didShowCardAt index: Int) {
+        //play song when card is shown
         currentSong = songs[index]
         trackURI = songs[index].uri
         if isPlaying {
@@ -478,6 +370,7 @@ extension APIManager: KolodaViewDelegate{
 
 //MARK: core data functions
 extension APIManager{
+    //add response to core data
     func AddResponse(song: Song, liked: Bool){
         guard let entity = NSEntityDescription.entity(forEntityName: "SongResponse", in: context) else { return  }
         
@@ -508,7 +401,7 @@ extension APIManager{
         return
     }
     
-    
+    //get all songs that have been liked, used for recommendations
     func getLikedSongs(){
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "SongResponse")
         fetchRequest.predicate = NSPredicate(format: "liked == \(true)")

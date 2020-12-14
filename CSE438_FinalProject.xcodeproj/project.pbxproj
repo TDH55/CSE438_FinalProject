@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5621B048257EFF1B00F0B669 /* Responses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5621B046257EFF1B00F0B669 /* Responses.xcdatamodeld */; };
 		5621B05625808DDD00F0B669 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621B05525808DDD00F0B669 /* APIManager.swift */; };
-		56336914257AFCEB004B2D9A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56336913257AFCEB004B2D9A /* LoginViewController.swift */; };
 		5648E5CC2574AD81004DC7AB /* SongListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5648E5CB2574AD81004DC7AB /* SongListVC.swift */; };
 		567EC8522584BA4600EA9384 /* UIAlertControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567EC8512584BA4600EA9384 /* UIAlertControllerExtension.swift */; };
 		567EC8632584C21500EA9384 /* AlertGenreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 567EC8622584C21500EA9384 /* AlertGenreView.xib */; };
@@ -39,7 +38,6 @@
 		1E26C55984F45C5FC9A0B524 /* Pods-CSE438_FinalProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CSE438_FinalProject.debug.xcconfig"; path = "Target Support Files/Pods-CSE438_FinalProject/Pods-CSE438_FinalProject.debug.xcconfig"; sourceTree = "<group>"; };
 		5621B047257EFF1B00F0B669 /* Responses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Responses.xcdatamodel; sourceTree = "<group>"; };
 		5621B05525808DDD00F0B669 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
-		56336913257AFCEB004B2D9A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5648E5CB2574AD81004DC7AB /* SongListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListVC.swift; sourceTree = "<group>"; };
 		567EC8512584BA4600EA9384 /* UIAlertControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerExtension.swift; sourceTree = "<group>"; };
 		567EC8622584C21500EA9384 /* AlertGenreView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertGenreView.xib; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 				5648E5CB2574AD81004DC7AB /* SongListVC.swift */,
 				56C337512567895300F4F95F /* HomeViewController */,
 				56E43235256327660088D117 /* ViewController.swift */,
-				56336913257AFCEB004B2D9A /* LoginViewController.swift */,
 				567EC8762584D4FB00EA9384 /* GenrePickerVC.swift */,
 			);
 			path = ViewControllers;
@@ -327,7 +324,6 @@
 				5621B048257EFF1B00F0B669 /* Responses.xcdatamodeld in Sources */,
 				56C3375B25678D7A00F4F95F /* Song.swift in Sources */,
 				56E43236256327660088D117 /* ViewController.swift in Sources */,
-				56336914257AFCEB004B2D9A /* LoginViewController.swift in Sources */,
 				56E43232256327660088D117 /* AppDelegate.swift in Sources */,
 				56C337612567926600F4F95F /* APIResponse.swift in Sources */,
 				56C3375F2567903200F4F95F /* Artist.swift in Sources */,

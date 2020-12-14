@@ -18,6 +18,7 @@ class GenreCell: UITableViewCell{
     @IBOutlet weak var selectGenreButton: UIButton!
 
     
+    //toggle if it is selectdd in the api manager and the ui
     @IBAction func SelectButtonClicked(_ sender: Any) {
         
         guard let apiManager = apiManager else { return }
@@ -63,12 +64,12 @@ class GenrePickerVC: UIViewController {
     @IBOutlet weak var doneButton: UIButton!
     
     var genres: [String] = []
-//    var selectedGenres: [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         DispatchQueue.global(qos: .userInitiated).async {
+            //get genre list and setup table view
             if let genreList = self.apiManager?.getGenres(){
                 self.genres = genreList
             }
@@ -78,9 +79,8 @@ class GenrePickerVC: UIViewController {
                 self.genreTableView.reloadData()
             }
         }
-//        let genres = apiManager?.getGenres()
         
-//        print(self.isModalInPresentation)
+        //dont let user dismiss without setting genre
         self.isModalInPresentation = true
         
         if let apiManager = apiManager{

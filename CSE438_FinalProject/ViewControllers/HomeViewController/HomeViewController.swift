@@ -21,23 +21,7 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         controller.dismiss(animated: true, completion: nil)
     }
-    
-//    func messageFriend() {
-//            let alert = UIAlertController(title: "Enter phone number", message: "Example: 1234567890", preferredStyle: UIAlertController.Style.alert)
-//            alert.addTextField(configurationHandler: {
-//                (textField: UITextField!) in
-//                textField.placeholder = "Phone Number:"
-//                textField.isSecureTextEntry = false
-//                textField.delegate = self
-//            })
-//            let nextAction: UIAlertAction = UIAlertAction(title: "Send", style: .default) { action -> Void in
-//                let text = (alert.textFields?.first as! UITextField).text
-//                self.phoneNumber = text ?? ""
-//                print(self.phoneNumber)
-//               }
-//            alert.addAction(nextAction)
-//            self.present(alert, animated: true, completion: nil)
-//        }
+
         
         func showMessageInterface() {
             if MFMessageComposeViewController.canSendText() == true {
@@ -46,7 +30,7 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
                         //recipients.removeAll()
                         //recipients.append(phoneNumber)
                 let currentSongName = apiManager?.currentSong?.name ?? "nil"
-                let currentArtist = apiManager?.currentSong?.artistName
+//                let currentArtist = apiManager?.currentSong?.artistName
                 let currentID = apiManager?.currentSong?.id ?? nil
                 print("Got here")
                 if currentSongName != "nil" && currentID != nil {
@@ -87,19 +71,14 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
     }
     
     @IBAction func songListButton(_ sender: Any) {
-//        let songListVC = SongListVC()
-//        navigationController?.pushViewController(songListVC, animated: true)
         apiManager?.pause()
     }
     
-    //TODO: Somethings wrong here when running on device - could be a storyboard issue
     @IBAction func lyricsButton(_ sender: Any) {
-//        let lyricsVC = LyricsViewController()
-//        navigationController?.pushViewController(lyricsVC, animated: true)
     }
     
     @IBAction func shareButton(_ sender: Any) {
-        //messageFriend()
+        //messageFriend
         showMessageInterface()
     }
     
@@ -137,8 +116,6 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
         songCardView.delegate = apiManager
         songCardView.dataSource = apiManager
         
-        //IMPORTANT!!! this is not a real implementation, we need to check for permission and ask if needed, and then load songs
-        //TODO: check if authorized, and authorize user if they are not
         //if auth fails, retry
         DispatchQueue.main.async {
             self.apiManager!.connect()
@@ -152,7 +129,6 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
             playPauseButton.setImage(UIImage(systemName: "play.fill", withConfiguration: playPauseImageConfig), for: .normal)
         }
         
-        //navigationController?.navigationBar.isHidden = true
 
     }
     
@@ -163,11 +139,7 @@ class HomeViewController: UIViewController, MFMessageComposeViewControllerDelega
             apiManager.play()
         }
     }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        apiManager?.getRecs(3)
-//    }
-    
+
     /*
     // MARK: - Navigation
 
